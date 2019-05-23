@@ -14,16 +14,16 @@ if(event.button == 0) {
 
   if(isShown)
   {
-    
+
     $("#myDiv").fadeOut(300, function(){
-      
+
       $(this).remove();
 
     });
 
     isShown = false;
   }
-      
+
 }
 }, true);
 // mousedown event ends
@@ -41,23 +41,36 @@ if(event.button == 0) {
     {
       showPopup();
     }
-      
+
    }
 }, true);
 //mouseup event ends
 
 
+// write to local function
 
+function localSave(theValue){
+  chrome.storage.sync.set({'highlightedKey': theValue}, function() {
+    // Notify that we saved.
+    // message('Text saved' + theValue);
+    console.log('Text saved ' + theValue);
+    chrome.storage.sync.get(['highlightedKey'], function(items) {
+      alert('Settings retrieved ' + items.highlightedKey);
+
+      console.log(items)
+    });
+  });
+}
 
 
 // this function get selected text
 function getSelected() {
-  
+
   var t = '';
-  
+
   if (window.getSelection) {
   t = window.getSelection();
-  } 
+  }
   else if (document.getSelection) {
   t = document.getSelection();
   }
@@ -65,7 +78,7 @@ function getSelected() {
   t = document.selection.createRange().text;
   }
 
-  
+
   return encodeURIComponent(t.toString());
 }
 
@@ -115,7 +128,7 @@ li_twitter.style.margin = "0px";
 li_search.style.display = "inline";
 li_copy.style.display = "inline";
 li_twitter.style.display = "inline";
- 
+
 
 
 
@@ -148,7 +161,9 @@ searchBtn.addEventListener("click", function() {
       chrome.runtime.sendMessage({"message": "open_new_tab", "q": selection});
       clearSelection()
     }
-  
+
+
+
 });
 
 copyBtn.addEventListener("click", function() {
@@ -158,7 +173,9 @@ copyBtn.addEventListener("click", function() {
       document.execCommand('copy');
       clearSelection()
     }
-  
+
+    localSave(selection);
+
 });
 
 
@@ -169,10 +186,23 @@ twitterBtn.addEventListener("click", function() {
 
       popupCenter("https://twitter.com/intent/tweet?text=" + decodeURI(selection), "Share on twitter" ,550, 420)
       clearSelection()
-      
+
     }
-  
+
 });
+
+// {
+//   "some.url.com": {
+//     text: [{
+//       collaborate: somecomment
+//     }, {
+//       and: some_other_comment
+//     }]
+//   }
+//   some.other.url.com: {
+//     text:
+//   }
+// }
 
 
 
@@ -200,7 +230,7 @@ function popupCenter(url, title, w, h) {
 var left = (screen.width/2)-(w/2);
 var top = (screen.height/2)-(h/2);
 return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-} 
+}
 
 
 function clearSelection() {

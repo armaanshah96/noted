@@ -20,7 +20,7 @@
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnque2hu5m1zKypS5XIq1SCCQhQHGJLVfM7CiQ7cIT1Bp8FjZozkkTYueDRDvNSVJzSu3G5E6vaFT0wbQpctEX7+4c/V3krwMB9BraHQrGGFk9GPlZ/5DnVq9onoSIqYrvyppnd4+BIcKizvJsb/EmMAvbLoSCn+bVPWGsydVOLMrBPy1kfymTh2CaFJlBQu0/HCGXrx4O5V6LPCTUnmfkAsurmB8iyG/sxTtCt826goCcpGjDijJ5h+ZkDifxmCQzxHNSf5VE5+AIkQwF0HDUIIHEthJgOxiF6OgvO7hIHJjhVCvxbucCwhddpKNAubMjOe98guwu+17xVnBV1TyHQIDAQAB",
    "manifest_version": 2,
    "name": "Understood",
-   "permissions": [ "activeTab", "\u003Call_urls>", "tabs" ],
+   "permissions": [ "activeTab", "\u003Call_urls>", "tabs", "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "1.0",
    "web_accessible_resources": [ "images/*.png" ]
