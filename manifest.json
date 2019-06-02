@@ -4,18 +4,18 @@
       "scripts": [ "background.js" ]
    },
    "browser_action": {
-      "default_icon": "icon128.png"
+      "default_icon": "icons/icon128.png"
    },
    "content_scripts": [ {
-      "js": [ "jquery-3.1.0.min.js", "content.js" ],
+      "js": [ "packages/jquery-3.1.0.min.js", "content.js" ],
       "matches": [ "\u003Call_urls>" ]
    } ],
    "description": "Medium inspired floating Popup for selected text to enhance productivity.",
    "homepage_url": "http://andreaslarsen.github.io ",
    "icons": {
-      "128": "icon128.png",
-      "16": "icon16.png",
-      "48": "icon48.png"
+      "128": "icons/icon128.png",
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
    },
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnque2hu5m1zKypS5XIq1SCCQhQHGJLVfM7CiQ7cIT1Bp8FjZozkkTYueDRDvNSVJzSu3G5E6vaFT0wbQpctEX7+4c/V3krwMB9BraHQrGGFk9GPlZ/5DnVq9onoSIqYrvyppnd4+BIcKizvJsb/EmMAvbLoSCn+bVPWGsydVOLMrBPy1kfymTh2CaFJlBQu0/HCGXrx4O5V6LPCTUnmfkAsurmB8iyG/sxTtCt826goCcpGjDijJ5h+ZkDifxmCQzxHNSf5VE5+AIkQwF0HDUIIHEthJgOxiF6OgvO7hIHJjhVCvxbucCwhddpKNAubMjOe98guwu+17xVnBV1TyHQIDAQAB",
    "manifest_version": 2,
