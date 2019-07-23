@@ -122,9 +122,9 @@ function showPopup() {
   li_twitter.style.display = "inline";
 
 
-  var searchIcon = chrome.runtime.getURL("images/search.png");
-  var copyIcon = chrome.runtime.getURL("images/copy.png");
-  var twitterIcon = chrome.runtime.getURL("images/twitter.png");
+  var searchIcon = chrome.extension.getURL("images/search.png");
+  var copyIcon = chrome.extension.getURL("images/copy.png");
+  var twitterIcon = chrome.extension.getURL("images/twitter.png");
 
   var searchBtn = createHoverButton(searchIcon)
   var copyBtn = createHoverButton(copyIcon)
