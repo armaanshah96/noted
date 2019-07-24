@@ -1,4 +1,14 @@
+var DEBUG_ENV = "DEBUG"
+var PRODUCTION_ENV = "PRODUCTION"
 
+/*
+  Currently unused
+*/
+function isDebugMode() {
+  var m = null;
+  var m = chrome.runtime.getManifest;
+  return m && !m.key && !m.update_url ? DEBUG_ENV : PRODUCTION_ENV ;
+}
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {

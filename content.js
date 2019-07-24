@@ -3,10 +3,8 @@ var pageY;
 var isShown = false;
 
 icons = {
-  "search": chrome.extension.getURL("images/search.png")
+  "search": chrome.runtime.getURL("images/search.png")
 }
-
-console.log(icons["search"])
 
 //mousedown event start
 document.addEventListener("mousedown", function(event){
@@ -37,21 +35,6 @@ document.addEventListener("mouseup", function(event){
   }
 }, true);
 //mouseup event ends
-
-// write to local storage
-function localSave(theValue){
-  chrome.storage.sync.set({'highlightedKey': theValue}, function() {
-    // Notify that we saved.
-    // message('Text saved' + theValue);
-    console.log('Text saved ' + theValue);
-    chrome.storage.sync.get(['highlightedKey'], function(items) {
-      alert('Settings retrieved ' + items.highlightedKey);
-
-      console.log(items)
-    });
-  });
-}
-
 
 // this function gets selected text in clipboard
 function getSelected() {
@@ -122,9 +105,9 @@ function showPopup() {
   li_twitter.style.display = "inline";
 
 
-  var searchIcon = chrome.extension.getURL("images/search.png");
-  var copyIcon = chrome.extension.getURL("images/copy.png");
-  var twitterIcon = chrome.extension.getURL("images/twitter.png");
+  var searchIcon = chrome.runtime.getURL("images/search.png");
+  var copyIcon = chrome.runtime.getURL("images/copy.png");
+  var twitterIcon = chrome.runtime.getURL("images/twitter.png");
 
   var searchBtn = createHoverButton(searchIcon)
   var copyBtn = createHoverButton(copyIcon)
@@ -146,7 +129,7 @@ function showPopup() {
       clearSelection()
     }
 
-    localSave(selection);
+    StorageManager.saveHighlightedText(selection);
   });
 
 
@@ -190,12 +173,13 @@ function showPopup() {
   isShown = true;
 }
 
+
+
 function popupCenter(url, title, w, h) {
   var left = (screen.width/2)-(w/2);
   var top = (screen.height/2)-(h/2);
   return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
 }
-
 
 function clearSelection() {
   if ( document.selection ) {
@@ -204,3 +188,26 @@ function clearSelection() {
     window.getSelection().removeAllRanges();
   }
 }
+
+var StorageManager = function(){
+  function retrieveTextByKey(key) {
+    chrome.storage.sync.get(['highlightedKey'], function(items) {
+      alert('Settings retrieved ' + items.highlightedKey);
+
+      console.debug(items)
+    });
+  }
+
+  function saveHighlightedText(highlightedValue) {
+    chrome.storage.sync.set({'highlightedKey': highlightedValue}, function() {
+      console.debug('Text saved ' + highlightedValue);
+
+      retrieveTextByKey('highlightedKey')
+    });
+  }
+
+  return {
+    retrieveTextByKey: retrieveTextByKey,
+    saveHighlightedText: saveHighlightedText
+  }
+}();
