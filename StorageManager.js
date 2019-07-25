@@ -3,8 +3,8 @@ var StorageManager = function(){
     chrome.storage.sync.get(['highlightedKey'], function(items) {
       alert('Settings retrieved ' + items.highlightedKey);
       console.debug(items)
-
-      callback(items.highlightedKey)
+      
+      typeof callback === 'function' && callback(items.highlightedKey)
     });
   }
 

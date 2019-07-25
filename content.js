@@ -48,7 +48,7 @@ function getSelected() {
     t = document.selection.createRange().text;
   }
 
-  return encodeURIComponent(t.toString());
+  return t.toString();
 }
 
 function createHoverButton(icon) {
@@ -172,8 +172,6 @@ function showPopup() {
 
   isShown = true;
 }
-
-
 
 function popupCenter(url, title, w, h) {
   var left = (screen.width/2)-(w/2);
