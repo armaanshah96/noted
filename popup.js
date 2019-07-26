@@ -1,23 +1,27 @@
 StorageManager.retrieveAllText(function(items) {
 	for(var key of Object.keys(items)) {
     var listNode = document.createElement("UL");
-    listNode.class = "listFormat"
+    listNode.className = "listFormat"
 
-    var urlHeader = document.createElement("H3");
-    var urlText = document.createTextNode(key);
-    urlHeader.appendChild(urlText);
+    var urlHeader = constructNodeWithText("H3", key);
 
     listNode.appendChild(urlHeader);
 
 		var item = items[key]
 		for(var text of item) {
-      var node = document.createElement("LI");
-			var textNode = document.createTextNode(text);
-			node.appendChild(textNode);
+      var listItem = constructNodeWithText("LI", text);
 
-			listNode.appendChild(node)
+			listNode.appendChild(listItem);
 		}
 
     document.getElementById("titleContainer").appendChild(listNode);
 	}
 });
+
+function constructNodeWithText(type, key) {
+  var node = document.createElement(type);
+  var textNode = document.createTextNode(key);
+  node.appendChild(textNode);
+
+  return node;
+}
