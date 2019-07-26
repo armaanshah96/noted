@@ -1,0 +1,56 @@
+/* Popup Starting Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+  background-color:#efefef;
+  font-family: monospace, sans-serif;
+
+  width:40em;
+  height:20em;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2.0em;
+}
+
+h3 {
+    font-size: 1.8em;
+}
+
+h4 {
+    font-size: 1.6em;
+}
+
+h5 {
+    font-size: 1.4em;
+}
+
+h6 {
+    font-size:1.1em;
+}
+
+p {
+    font-size: .9em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#titleContainer {
+  padding: 1em;
+}
+
+.title {
+  font-family: serif;
+  font-weight: 600;
+}

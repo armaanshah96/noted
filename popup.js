@@ -1,4 +1,7 @@
 StorageManager.retrieveTextByKey('highlightedKey', function(saved) {
-	console.log('in POPUP ' + saved)
-	document.getElementById("status").innerHTML = saved + ''
+	var node = document.createElement("LI");
+	var textNode = document.createTextNode(saved);
+	node.appendChild(textNode);
+	
+	document.getElementById("savedList").appendChild(node)
 });
