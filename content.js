@@ -129,7 +129,7 @@ function showPopup() {
       clearSelection()
     }
 
-    StorageManager.saveHighlightedText(selection);
+    StorageManager.saveHighlightedText(location.href, selection);
   });
 
 
