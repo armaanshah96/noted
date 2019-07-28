@@ -126,23 +126,22 @@ function showPopup() {
     var selection = getSelected();
     if(selection != '') {
       document.execCommand('copy');
+      StorageManager.saveSelected(location.href, selection);
+
       clearSelection()
     }
-
-    StorageManager.saveSelected(location.href, selection);
   });
 
 
   twitterBtn.addEventListener("click", function() {
     var selection = getSelected();
     if(selection != '') {
-      clearSelection()
-    }
+      promptNote(function(note) {
+        StorageManager.saveSelectedWithNote(location.href, selection, note);
+      });
 
-    promptNote(function(note) {
-      StorageManager.saveSelectedWithNote(location.href, selection, note);
-    });
-    
+      clearSelection();
+    }
   });
 
   /* TODO : 
@@ -181,6 +180,7 @@ function promptNote(callback) {
   inputNode.id = "noteInputBox";
   inputButton.type = "button";
   inputButton.id = "saveNoteButton";
+  inputButton.value = "save";
 
   inputDiv.appendChild(inputNode);
   inputDiv.appendChild(inputButton);
@@ -199,9 +199,11 @@ function promptNote(callback) {
   document.body.appendChild(inputDiv);
 
   inputButton.addEventListener("click", function() {
-    var noteResult = inputNode.value
+    var noteResult = inputNode.value;
     console.debug("inner text of input element is : " + noteResult);
-    callback(noteResult)
+    inputDiv.remove();
+    
+    callback(noteResult);
   });
 }
 

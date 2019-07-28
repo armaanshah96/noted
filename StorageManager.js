@@ -41,6 +41,7 @@ var StorageManager = function(){
       saveObj[url] = existingSavedText.concat(textAndNote);
 
       chrome.storage.sync.set(saveObj, function() {
+        alert("Saved your note!");
         console.debug('new text and note on this url: ' + saveObj[url]);
       });
     })
