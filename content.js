@@ -114,7 +114,7 @@ function showPopup() {
   var twitterBtn  = createHoverButton(twitterIcon)
 
   searchBtn.addEventListener("click", function() {
-    var selection =  getSelected();
+    var selection = getSelected();
 
     if(selection != '') {
       chrome.runtime.sendMessage({"message": "open_new_tab", "q": selection});
@@ -123,36 +123,35 @@ function showPopup() {
   });
 
   copyBtn.addEventListener("click", function() {
-    var selection =  getSelected();
+    var selection = getSelected();
     if(selection != '') {
       document.execCommand('copy');
       clearSelection()
     }
 
-    StorageManager.saveHighlightedText(location.href, selection);
+    StorageManager.saveSelected(location.href, selection);
   });
 
 
   twitterBtn.addEventListener("click", function() {
-    var selection =  getSelected();
+    var selection = getSelected();
     if(selection != '') {
-      popupCenter("https://twitter.com/intent/tweet?text=" + decodeURI(selection), "Share on twitter" ,550, 420)
       clearSelection()
     }
+
+    promptNote(function(note) {
+      StorageManager.saveSelectedWithNote(location.href, selection, note);
+    });
+    
   });
 
-  // {
-  //   "some.url.com": {
-  //     text: [{
-  //       collaborate: somecomment
-  //     }, {
-  //       and: some_other_comment
-  //     }]
-  //   }
-  //   some.other.url.com: {
-  //     text:
-  //   }
-  // }
+  /* TODO : 
+      1) generic clearSelection usage
+      2) move calls to storage manager inside non-empty selection conditions
+      3) alert that note was saved
+      4) remove text box from webpage after save (after successful save or just save?)
+      5) alert that note was NOT saved?
+  */
 
 
 
@@ -171,6 +170,39 @@ function showPopup() {
   $("#myDiv").fadeIn(300);
 
   isShown = true;
+}
+
+function promptNote(callback) {
+  var inputDiv = document.createElement("div");
+  var inputNode = document.createElement("input");
+  var inputButton = document.createElement("input");
+  
+  inputNode.type = "text";
+  inputNode.id = "noteInputBox";
+  inputButton.type = "button";
+  inputButton.id = "saveNoteButton";
+
+  inputDiv.appendChild(inputNode);
+  inputDiv.appendChild(inputButton);
+
+  inputDiv.id = 'notePrompt';
+  inputDiv.style.backgroundColor = '#333333';
+  inputDiv.style.position = "absolute";
+  inputDiv.style.boxSizing = 'content-box';
+  inputDiv.style.left = pageX+'px';
+  inputDiv.style.top = pageY+'px';
+  inputDiv.style.padding = "6px 6px 0px 6px";
+  inputDiv.style.display = "inherit";
+  inputDiv.style.borderRadius = "6px";
+  inputDiv.style.zIndex = '200000001';
+
+  document.body.appendChild(inputDiv);
+
+  inputButton.addEventListener("click", function() {
+    var noteResult = inputNode.value
+    console.debug("inner text of input element is : " + noteResult);
+    callback(noteResult)
+  });
 }
 
 function popupCenter(url, title, w, h) {

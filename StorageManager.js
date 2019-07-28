@@ -11,15 +11,14 @@ var StorageManager = function(){
     });
   }
 
-// 1) save text by url into array
-// 2) append text to array on url key if exists, else 1)
-  function saveHighlightedText(url, text) {
+  function saveSelected(url, text) {
     var saveObj = {[url]: null}; 
 
     retrieveTextByKey(url, function(existingSavedText) {
       console.debug(existingSavedText)
       console.debug('uid of text saved ' + url);
 
+      // fixme: necessary to check 'object' type
       if(typeof existingSavedText === 'object' && existingSavedText.length > 0) {
         saveObj[url] = existingSavedText.concat(text);
       } else {
@@ -32,9 +31,25 @@ var StorageManager = function(){
     })
   }
 
+  function saveSelectedWithNote(url, selection, note) {
+    retrieveTextByKey(url, function(existingSavedText) {
+      existingSavedText = existingSavedText.length > 0 ? existingSavedText : []
+      var saveObj = { [url] : existingSavedText };
+
+      var textAndNote = { selection: selection, note: note };
+
+      saveObj[url] = existingSavedText.concat(textAndNote);
+
+      chrome.storage.sync.set(saveObj, function() {
+        console.debug('new text and note on this url: ' + saveObj[url]);
+      });
+    })
+  }
+
   return {
     retrieveTextByKey: retrieveTextByKey,
     retrieveAllText: retrieveAllText,
-    saveHighlightedText: saveHighlightedText
+    saveSelected: saveSelected,
+    saveSelectedWithNote: saveSelectedWithNote
   }
 }();

@@ -34,21 +34,27 @@ StorageManager.retrieveAllText(function(items) {
     listNode.appendChild(urlTitle);
 
 
-		var item = items[key]
-		for(var text of item) {
-      var listItem = constructNodeWithText("LI", text);
+    var webpage = items[key]
+    for(var saved of webpage) {
+      var listItem = constructNodeWithText("LI", saved);
       listItem.className += "project-item-title";
 
-			listNode.appendChild(listItem);
-		}
+      listNode.appendChild(listItem);
+    }
 
     document.getElementById("titleContainer").appendChild(listNode);
 	}
 });
 
-function constructNodeWithText(type, key) {
+function constructNodeWithText(type, text) {
+  var fullText = text;
+
+  if(typeof text === 'object') {
+    fullText = '(Selection =) ' + text.selection + ': (Note =) ' + text.note;
+  }
+
   var node = document.createElement(type);
-  var textNode = document.createTextNode(key);
+  var textNode = document.createTextNode(fullText);
   node.appendChild(textNode);
 
   return node;
