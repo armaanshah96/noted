@@ -33,7 +33,7 @@ var StorageManager = function(){
 
   function saveSelectedWithNote(url, selection, note) {
     retrieveTextByKey(url, function(existingSavedText) {
-      existingSavedText = existingSavedText.length > 0 ? existingSavedText : []
+      existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : []
       var saveObj = { [url] : existingSavedText };
 
       var textAndNote = { selection: selection, note: note };
