@@ -11,9 +11,11 @@ var StorageManager = function(){
     });
   }
 
-  function saveSelected(url, text) {
+  function saveSelected(url, title, text) {
     retrieveTextByKey(url, function(existingSavedText) {
-      existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : []
+      existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : [{title: title}]
+
+      var textObj = { selection: text };
       var saveObj = {[url]: existingSavedText.concat(text)}; 
 
       chrome.storage.sync.set(saveObj, function() {
@@ -22,9 +24,9 @@ var StorageManager = function(){
     })
   }
 
-  function saveSelectedWithNote(url, selection, note) {
+  function saveSelectedWithNote(url, title, selection, note) {
     retrieveTextByKey(url, function(existingSavedText) {
-      existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : []
+      existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : [{title: title}]
 
       var textAndNote = { selection: selection, note: note };
       var saveObj = { [url] : existingSavedText.concat(textAndNote) };

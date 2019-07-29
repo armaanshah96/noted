@@ -126,7 +126,7 @@ function showPopup() {
     var selection = getSelected();
     if(selection != '') {
       document.execCommand('copy');
-      StorageManager.saveSelected(location.href, selection);
+      StorageManager.saveSelected(location.href, document.title, selection);
 
       clearSelection()
     }
@@ -137,7 +137,7 @@ function showPopup() {
     var selection = getSelected();
     if(selection != '') {
       promptNote(function(note) {
-        StorageManager.saveSelectedWithNote(location.href, selection, note);
+        StorageManager.saveSelectedWithNote(location.href, document.title, selection, note);
       });
 
       clearSelection();

@@ -1,13 +1,14 @@
 StorageManager.retrieveAllText(function(items) {
-	for(var key of Object.keys(items)) {
-    var listNode = document.createElement("UL")
+	for(var urlKey of Object.keys(items)) {
+    var webpage = items[urlKey];
+    var titleText = webpage[0].title;
+    var listNode = document.createElement("UL");
     listNode.className += "project-item";
 
-    var titleContainer = constructHeaderNode(key);
+    var titleContainer = constructHeaderNode(urlKey, titleText);
 
     listNode.appendChild(titleContainer);
 
-    var webpage = items[key]
     for(var saved of webpage) {
       var listItem = constructNodeWithText("LI", saved);
       listItem.className += "project-item-title";
@@ -19,14 +20,18 @@ StorageManager.retrieveAllText(function(items) {
 	}
 });
 
-function constructHeaderNode(url) {
-  var titleNode = constructNodeWithText("h5", "Some Title");
-  titleNode.className += "no-margin";
+function constructHeaderNode(url, titleText) {
+  var container = document.createElement('div');
   var hostnameNode = constructNodeWithText("p", extractUrlHostname(url));
   hostnameNode.className += "no-margin";
-  var container = document.createElement('div');
 
-  container.appendChild(titleNode);
+  if( titleText !== undefined && titleText !== null ){
+    var titleNode = constructNodeWithText("h5", titleText);
+    titleNode.className += "no-margin";
+
+    container.appendChild(titleNode);
+  }
+  
   container.appendChild(hostnameNode);
   container.className += "project-item-header";
 
