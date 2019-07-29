@@ -12,18 +12,9 @@ var StorageManager = function(){
   }
 
   function saveSelected(url, text) {
-    var saveObj = {[url]: null}; 
-
     retrieveTextByKey(url, function(existingSavedText) {
-      console.debug(existingSavedText)
-      console.debug('uid of text saved ' + url);
-
-      // fixme: necessary to check 'object' type
-      if(typeof existingSavedText === 'object' && existingSavedText.length > 0) {
-        saveObj[url] = existingSavedText.concat(text);
-      } else {
-        saveObj[url] = [text]
-      }
+      existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : []
+      var saveObj = {[url]: existingSavedText.concat(text)}; 
 
       chrome.storage.sync.set(saveObj, function() {
         console.debug(saveObj[url]);
@@ -34,11 +25,9 @@ var StorageManager = function(){
   function saveSelectedWithNote(url, selection, note) {
     retrieveTextByKey(url, function(existingSavedText) {
       existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : []
-      var saveObj = { [url] : existingSavedText };
 
       var textAndNote = { selection: selection, note: note };
-
-      saveObj[url] = existingSavedText.concat(textAndNote);
+      var saveObj = { [url] : existingSavedText.concat(textAndNote) };
 
       chrome.storage.sync.set(saveObj, function() {
         alert("Saved your note!");
