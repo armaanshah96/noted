@@ -1,14 +1,29 @@
 ul {
     margin: 0;
     padding: 0
+
 }
 
-li{
+
+
+body{
+    width:500px;
+}
+li {
   height: auto;
-  text-transform: capitalize;
-
+  text-transform: none;
+  list-style: none;
+  border-bottom: 1px dotted #ccc;
+  height: auto;
+  padding: 10px;
 }
-
+li:hover {
+  background-color: rgb(40,201,59,.05);
+  -webkit-transition: all 0.2s;
+  -moz-transition:    all 0.2s;
+  -ms-transition:     all 0.2s;
+  -o-transition:      all 0.2s;
+}
 
 h1,
 h2,
@@ -20,8 +35,6 @@ h6 {
     padding: 0;
     font-weight: 400
 }
-
-
 
 ::-webkit-scrollbar {
     height: 2px;
@@ -53,6 +66,7 @@ h6 {
  *
  * Copyright (c) 2019 Foxy Themes
  */
+
 
 @media print {
     *,
@@ -24391,6 +24405,7 @@ fieldset[disabled] .full-calendar .fc-button:hover {
 .project-list-title {
     font-size: 1.38462rem;
     margin-bottom: 28px
+
 }
 
 .project-item {
