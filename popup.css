@@ -4,11 +4,10 @@ ul {
 
 }
 
-
-
 body{
     width:500px;
 }
+
 li {
   height: auto;
   text-transform: none;
@@ -17,6 +16,7 @@ li {
   height: auto;
   padding: 10px;
 }
+
 li:hover {
   background-color: rgb(40,201,59,.05);
   -webkit-transition: all 0.2s;
@@ -34,6 +34,10 @@ h6 {
     margin: 0;
     padding: 0;
     font-weight: 400
+}
+
+.no-margin {
+    margin: 0;
 }
 
 ::-webkit-scrollbar {
@@ -24404,8 +24408,7 @@ fieldset[disabled] .full-calendar .fc-button:hover {
 
 .project-list-title {
     font-size: 1.38462rem;
-    margin-bottom: 28px
-
+    margin-bottom: 28px;
 }
 
 .project-item {
@@ -24419,6 +24422,17 @@ fieldset[disabled] .full-calendar .fc-button:hover {
     background-color: #fff;
     padding: 23px;
     margin-bottom: .923077rem
+}
+
+.project-item-header {
+    cursor: pointer;
+    color: #4ad69e;
+    padding: 10px;
+}
+
+.project-item-header:hover {
+    color: #41a67d;
+    background: #fafafa;
 }
 
 @media (max-width:767.98px) {

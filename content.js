@@ -144,16 +144,6 @@ function showPopup() {
     }
   });
 
-  /* TODO : 
-      1) generic clearSelection usage
-      2) move calls to storage manager inside non-empty selection conditions
-      3) alert that note was saved
-      4) remove text box from webpage after save (after successful save or just save?)
-      5) alert that note was NOT saved?
-  */
-
-
-
   li_search.appendChild(searchBtn);
   li_copy.appendChild(copyBtn);
   li_twitter.appendChild(twitterBtn);

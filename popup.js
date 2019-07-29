@@ -3,10 +3,9 @@ StorageManager.retrieveAllText(function(items) {
     var listNode = document.createElement("UL")
     listNode.className += "project-item";
 
-    var urlLinkNode = constructNodeWithText('a', extractUrlHostname(key));
-    urlLinkNode.href = key;
+    var titleContainer = constructHeaderNode(key);
 
-    listNode.appendChild(urlLinkNode);
+    listNode.appendChild(titleContainer);
 
     var webpage = items[key]
     for(var saved of webpage) {
@@ -19,6 +18,22 @@ StorageManager.retrieveAllText(function(items) {
     document.getElementById("titleContainer").appendChild(listNode);
 	}
 });
+
+function constructHeaderNode(url) {
+  var titleNode = constructNodeWithText("h5", "Some Title");
+  titleNode.className += "no-margin";
+  var hostnameNode = constructNodeWithText("p", extractUrlHostname(url));
+  hostnameNode.className += "no-margin";
+  var container = document.createElement('div');
+
+  container.appendChild(titleNode);
+  container.appendChild(hostnameNode);
+  container.className += "project-item-header";
+
+  container.addEventListener("click", function() { window.open(url) });
+
+  return container;
+}
 
 function constructNodeWithText(type, text) {
   var fullText = text;
@@ -55,7 +70,7 @@ function extractUrlHostname(url) {
   if(url.indexOf("file:") > -1 && hostname.length === 0) {
     var nameOfLocalFile = url.split('/').pop();
     var extensionIndex = nameOfLocalFile.lastIndexOf('.');
-    
+
     hostname = nameOfLocalFile.slice(0, extensionIndex);
   }
 
