@@ -2,37 +2,11 @@ StorageManager.retrieveAllText(function(items) {
 	for(var key of Object.keys(items)) {
     var listNode = document.createElement("UL")
     listNode.className += "project-item";
-    // listNode.className = "listFormat"
 
-    var urlHeader = constructNodeWithText("H3", key);
-    var urlTitle = document.createElement('a');
+    var urlLinkNode = constructNodeWithText('a', extractUrlHostname(key));
+    urlLinkNode.href = key;
 
-
-    var hostname;
-    //find & remove protocol (http, ftp, etc.) and get hostname
-
-    if (key.indexOf("//") > -1) {
-        hostname = key.split('/')[2];
-    }
-    else {
-        hostname = key.split('/')[0];
-    }
-
-    //find & remove port number
-    hostname = hostname.split(':')[0];
-    //find & remove "?,.com,.co"
-    hostname = hostname.split('?')[0];
-    hostname = hostname.split('.com')[0];
-    hostname = hostname.split('.co')[0];
-
-
-    var linkText = document.createTextNode(hostname);
-    urlTitle.appendChild(linkText);
-    urlTitle.href = key;
-    document.body.appendChild(urlTitle);
-
-    listNode.appendChild(urlTitle);
-
+    listNode.appendChild(urlLinkNode);
 
     var webpage = items[key]
     for(var saved of webpage) {
@@ -58,4 +32,32 @@ function constructNodeWithText(type, text) {
   node.appendChild(textNode);
 
   return node;
+}
+
+function extractUrlHostname(url) {
+  var hostname;
+
+  if (url.indexOf("//") > -1) {
+      hostname = url.split('/')[2];
+  }
+  else {
+      hostname = url.split('/')[0];
+  }
+
+  //find & remove port number
+  hostname = hostname.split(':')[0];
+  //find & remove "?,.com,.co"
+  hostname = hostname.split('?')[0];
+  hostname = hostname.split('.com')[0];
+  hostname = hostname.split('.co')[0];
+
+  // for local files, take the name of the file
+  if(url.indexOf("file:") > -1 && hostname.length === 0) {
+    var nameOfLocalFile = url.split('/').pop();
+    var extensionIndex = nameOfLocalFile.lastIndexOf('.');
+    
+    hostname = nameOfLocalFile.slice(0, extensionIndex);
+  }
+
+  return decodeURI(hostname);
 }
