@@ -9,7 +9,7 @@ StorageManager.retrieveAllText(function(items) {
 
     listNode.appendChild(titleContainer);
 
-    for(var saved of webpage) {
+    for(var saved of webpage.slice(1)) {
       var listItem = constructNodeWithText("LI", saved);
       listItem.className += "project-item-title";
 
