@@ -40,6 +40,17 @@ h6 {
     margin: 0;
 }
 
+.trash-icon-hidden {
+    display: none;
+}
+
+.trash-icon-visible {
+    width: fit-content;
+    height: 3px
+    padding: 5px;
+    display: inline-block;
+}
+
 ::-webkit-scrollbar {
     height: 2px;
     width: 1px;

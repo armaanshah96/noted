@@ -11,15 +11,33 @@ StorageManager.retrieveAllText(function(items) {
     listNode.appendChild(titleContainer);
 
     for(var saved of webpage) {
-      var listItem = constructNodeWithText("LI", saved);
-      listItem.className += "project-item-title";
+      (function() {
+        var listItem = constructNodeWithText("LI", saved);
+        listItem.className += "project-item-title";
 
-      listNode.appendChild(listItem);
+        var trashIcon = constructTrashIconNode();
+        listItem.appendChild(trashIcon);
+        listItem.addEventListener("mouseover", function() { trashIcon.className = 'trash-icon-visible'; });
+        listItem.addEventListener("mouseout", function() { trashIcon.className = 'trash-icon-hidden'; });
+
+        listNode.appendChild(listItem);
+      }());
     }
 
     document.getElementById("titleContainer").appendChild(listNode);
 	}
 });
+
+function constructTrashIconNode() {
+  var trashButton = document.createElement("input");
+  trashButton.type = "image";
+  trashButton.src = './icons/trash32.png';
+  trashButton.className = 'trash-icon-hidden';
+
+  trashButton.addEventListener("click", function() { console.log("delete this!"); });
+
+  return trashButton;
+}
 
 function hasTitle(obj) {
   return obj.hasOwnProperty('title');
