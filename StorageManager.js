@@ -38,10 +38,35 @@ var StorageManager = function(){
     })
   }
 
+  function deleteTextInKey(url, textIndex, callback) {
+    console.log(url)
+    console.log(textIndex)
+    retrieveTextByKey(url, function(existingSavedText) {
+      existingSavedText.splice(textIndex,1);
+      console.log(existingSavedText);
+      if(existingSavedText < 1) {
+        console.error("Storage under this URL is in an unexpected state");
+      } else if(existingSavedText.length === 1) {
+        // Only {title: ""} object remains, remove from storage because not tracking any data
+        chrome.storage.sync.remove(url, function() {
+          console.log("No more remaining notes or highlights under this url");
+          callback();
+        });
+      } else {
+        // Maintain existing data by overwrite storage contents in key
+        chrome.storage.sync.set({[url] : existingSavedText}, function() {
+          console.log("Removed highlight and/or note from saved content for this url");
+          callback();
+        });
+      }
+    });
+  }
+
   return {
     retrieveTextByKey: retrieveTextByKey,
     retrieveAllText: retrieveAllText,
     saveSelected: saveSelected,
-    saveSelectedWithNote: saveSelectedWithNote
+    saveSelectedWithNote: saveSelectedWithNote,
+    deleteTextInKey: deleteTextInKey
   }
 }();

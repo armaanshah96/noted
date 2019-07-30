@@ -46,9 +46,8 @@ h6 {
 
 .trash-icon-visible {
     width: fit-content;
-    height: 3px
     padding: 5px;
-    display: inline-block;
+    display: inline;
 }
 
 ::-webkit-scrollbar {

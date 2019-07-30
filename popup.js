@@ -1,3 +1,5 @@
+var STORAGE_OFFSET = 1;
+
 StorageManager.retrieveAllText(function(items) {
 	for(var urlKey of Object.keys(items)) {
     var webpage = items[urlKey];
@@ -16,6 +18,7 @@ StorageManager.retrieveAllText(function(items) {
         listItem.className += "project-item-title";
 
         var trashIcon = constructTrashIconNode();
+        addListenerToTrashNode(trashIcon, listItem, urlKey);
         listItem.appendChild(trashIcon);
         listItem.addEventListener("mouseover", function() { trashIcon.className = 'trash-icon-visible'; });
         listItem.addEventListener("mouseout", function() { trashIcon.className = 'trash-icon-hidden'; });
@@ -28,13 +31,27 @@ StorageManager.retrieveAllText(function(items) {
 	}
 });
 
+function addListenerToTrashNode(trashIcon, listItem, url) {
+  trashIcon.addEventListener("click", function() {
+    var i = 0;
+    var item = listItem;
+    while( (item = item.previousSibling) != null) {
+      if(item.nodeName.toLowerCase() === 'li') {
+        i++;
+      }
+    }
+
+    console.log("COUNT IS : " + i);
+
+    StorageManager.deleteTextInKey(url, (STORAGE_OFFSET + i), function() { location.reload(); });
+  });
+}
+
 function constructTrashIconNode() {
   var trashButton = document.createElement("input");
   trashButton.type = "image";
   trashButton.src = './icons/trash32.png';
   trashButton.className = 'trash-icon-hidden';
-
-  trashButton.addEventListener("click", function() { console.log("delete this!"); });
 
   return trashButton;
 }
