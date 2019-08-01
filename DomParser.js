@@ -86,7 +86,11 @@ var DomParser = function() {
   }
 
   function extractSibIndex(tag) {
-    return parseInt(tag.charAt(tag.indexOf(":eq(") + 4));
+    var identifier = ":eq(";
+    var start = tag.indexOf(identifier) + identifier.length;
+    var end = tag.indexOf(")");
+
+    return parseInt(tag.substring(start,end));
   }
 
   function extractNodeNameFromSiblingTag(tag) {

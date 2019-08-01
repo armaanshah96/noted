@@ -11,29 +11,31 @@ var StorageManager = function(){
     });
   }
 
-  function saveSelected(url, title, text) {
+  function saveSelected(url, title, text, pathStack, callback) {
     retrieveTextByKey(url, function(existingSavedText) {
       existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : [{title: title}]
 
-      var textObj = { selection: text };
-      var saveObj = {[url]: existingSavedText.concat(text)}; 
+      var textObj = { selection: text, path: pathStack };
+      var saveObj = {[url]: existingSavedText.concat(textObj)}; 
 
       chrome.storage.sync.set(saveObj, function() {
         console.debug(saveObj[url]);
+        callback();
       });
     })
   }
 
-  function saveSelectedWithNote(url, title, selection, note) {
+  function saveSelectedWithNote(url, title, selection, note, pathStack, callback) {
     retrieveTextByKey(url, function(existingSavedText) {
       existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : [{title: title}]
 
-      var textAndNote = { selection: selection, note: note };
+      var textAndNote = { selection: selection, note: note, path: pathStack };
       var saveObj = { [url] : existingSavedText.concat(textAndNote) };
 
       chrome.storage.sync.set(saveObj, function() {
         alert("Saved your note!");
         console.debug('new text and note on this url: ' + saveObj[url]);
+        callback();
       });
     })
   }

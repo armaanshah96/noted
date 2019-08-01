@@ -14,7 +14,7 @@ StorageManager.retrieveAllText(function(items) {
 
     for(var saved of webpage) {
       (function() {
-        var listItem = constructNodeWithText("LI", saved);
+        var listItem = constructNodeWithText("LI", constructTextFromDataObj(saved));
         listItem.className += "project-item-title";
 
         var trashIcon = constructTrashIconNode();
@@ -81,17 +81,21 @@ function constructHeaderNode(url, titleText) {
 }
 
 function constructNodeWithText(type, text) {
-  var fullText = text;
-
-  if(typeof text === 'object') {
-    fullText = '(Selection =) ' + text.selection + ': (Note =) ' + text.note;
-  }
-
   var node = document.createElement(type);
-  var textNode = document.createTextNode(fullText);
+  var textNode = document.createTextNode(text);
   node.appendChild(textNode);
 
   return node;
+}
+
+function constructTextFromDataObj(text) {
+  var fullText = text.selection;
+
+  if(text.note !== undefined) {
+    fullText = '(Selection =) ' + text.selection + ': (Note =) ' + text.note;
+  } 
+
+  return fullText;
 }
 
 function extractUrlHostname(url) {

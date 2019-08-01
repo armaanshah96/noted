@@ -119,26 +119,29 @@ function showPopup() {
 
   searchBtn.addEventListener("click", function() {
     var selection = getSelected();
-    var node = DomParser.generateDomPath(selection.focusNode.parentElement);
-    console.log('node path is: ');
-    console.log(node);
-
-    var redrawn = DomParser.findNodeByPath(node);
-    console.log('node location: ');
-    console.log(redrawn);
-
+    var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
+    var selectionString = selection.toString();
 
     if(selection != '') {
-      chrome.runtime.sendMessage({"message": "open_new_tab", "q": selection});
+      var activeNode = selection.focusNode.parentElement;
+      StorageManager.saveSelected(location.href, document.title, selectionString, pathStack, function() { 
+        setHighlights(pathStack, selectionString);
+      });
+
       clearSelection()
     }
   });
 
   copyBtn.addEventListener("click", function() {
-    var selection = getSelectedAsString();
+    var selection = getSelected();
+    var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
+    var selectionString = selection.toString();
+
     if(selection != '') {
       document.execCommand('copy');
-      StorageManager.saveSelected(location.href, document.title, selection);
+      StorageManager.saveSelected(location.href, document.title, selectionString, pathStack, function() { 
+          setHighlights(pathStack, selectionString)
+      });
 
       clearSelection()
     }
@@ -146,10 +149,15 @@ function showPopup() {
 
 
   twitterBtn.addEventListener("click", function() {
-    var selection = getSelectedAsString();
+    var selection = getSelected();
+    var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
+    var selectionString = selection.toString();
+
     if(selection != '') {
       promptNote(function(note) {
-        StorageManager.saveSelectedWithNote(location.href, document.title, selection, note);
+        StorageManager.saveSelectedWithNote(location.href, document.title, selectionString , note, pathStack, function() {
+          setHighlights(pathStack, selectionString)
+        });
       });
 
       clearSelection();
@@ -171,6 +179,33 @@ function showPopup() {
   $("#myDiv").fadeIn(300);
 
   isShown = true;
+}
+
+function setHighlights(pathStack, selection) {
+  var node = DomParser.findNodeByPath(pathStack);
+  var fullText = node.textContent;
+  var startOfSelection = fullText.indexOf(selection);
+
+  if(startOfSelection === -1) {
+    return;
+  }
+
+  var m = document.createElement("mark");
+  m.className += 'highlighted';
+
+  var selectionLength = selection.length;
+  var previousText = fullText.substring(0, startOfSelection);
+  var markedText = document.createTextNode(fullText.substring(startOfSelection, startOfSelection + selectionLength));
+  var afterText = document.createTextNode(fullText.substring(startOfSelection + selectionLength));
+
+  m.appendChild(markedText);
+
+  node.textContent = previousText;
+  node.appendChild(m);
+  node.appendChild(afterText);
+
+  console.debug("highlighted node is: ");
+  console.debug(node);
 }
 
 function promptNote(callback) {

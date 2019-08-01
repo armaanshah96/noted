@@ -14,6 +14,7 @@
          "StorageManager.js",
          "content.js"
       ],
+      "css": ["content.css"],
       "matches": [ "\u003Call_urls>" ]
    } ],
    "description": "Medium inspired floating Popup for selected text to enhance productivity.",
