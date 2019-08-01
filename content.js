@@ -28,7 +28,7 @@ document.addEventListener("mousedown", function(event){
 document.addEventListener("mouseup", function(event){
   //right click
   if(event.button == 0) {
-    var selection =  getSelected();
+    var selection =  getSelectedAsString();
     if(selection != '') {
       showPopup();
     }
@@ -48,7 +48,11 @@ function getSelected() {
     t = document.selection.createRange().text;
   }
 
-  return t.toString();
+  return t;
+}
+
+function getSelectedAsString() {
+  return getSelected().toString();
 }
 
 function createHoverButton(icon) {
@@ -115,6 +119,14 @@ function showPopup() {
 
   searchBtn.addEventListener("click", function() {
     var selection = getSelected();
+    var node = DomParser.generateDomPath(selection.focusNode.parentElement);
+    console.log('node path is: ');
+    console.log(node);
+
+    var redrawn = DomParser.findNodeByPath(node);
+    console.log('node location: ');
+    console.log(redrawn);
+
 
     if(selection != '') {
       chrome.runtime.sendMessage({"message": "open_new_tab", "q": selection});
@@ -123,7 +135,7 @@ function showPopup() {
   });
 
   copyBtn.addEventListener("click", function() {
-    var selection = getSelected();
+    var selection = getSelectedAsString();
     if(selection != '') {
       document.execCommand('copy');
       StorageManager.saveSelected(location.href, document.title, selection);
@@ -134,7 +146,7 @@ function showPopup() {
 
 
   twitterBtn.addEventListener("click", function() {
-    var selection = getSelected();
+    var selection = getSelectedAsString();
     if(selection != '') {
       promptNote(function(note) {
         StorageManager.saveSelectedWithNote(location.href, document.title, selection, note);
