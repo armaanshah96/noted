@@ -160,18 +160,23 @@ function setHighlights(pathStack, selection) {
 function promptNote(callback) {
   var inputDiv = document.createElement("div");
   var inputTextBox = document.createElement("input");
-  var inputButton = document.createElement("input");
+  var saveButton = document.createElement("input");
+  var cancelButton = document.createElement("input");
   var divider = document.createElement('br');
   
   inputTextBox.type = "text";
   inputTextBox.id = "noteInputBox";
-  inputButton.type = "button";
-  inputButton.id = "saveNoteButton";
-  inputButton.value = "save";
+  cancelButton.type = "button";
+  cancelButton.id = "cancelNoteButton";
+  cancelButton.value = "cancel";
+  saveButton.type = "button";
+  saveButton.id = "saveNoteButton";
+  saveButton.value = "save";
 
   inputDiv.appendChild(inputTextBox);
   inputDiv.appendChild(divider);
-  inputDiv.appendChild(inputButton);
+  inputDiv.appendChild(saveButton);
+  inputDiv.appendChild(cancelButton);
 
   inputDiv.id = 'notePrompt';
   inputDiv.style.left = pageX+'px';
@@ -179,12 +184,18 @@ function promptNote(callback) {
  
   document.body.appendChild(inputDiv);
 
-  inputButton.addEventListener("click", function() {
+  saveButton.addEventListener("click", function() {
     var noteResult = inputTextBox.value;
     console.debug("inner text of input element is : " + noteResult);
     inputDiv.remove();
     
-    callback(noteResult);
+    callback();
+  });
+
+
+  cancelButton.addEventListener("click", function() {
+    console.debug("Note was cancelled");
+    inputDiv.remove();
   });
 }
 

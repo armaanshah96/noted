@@ -39,6 +39,12 @@
 	padding: 10px 90px 10px 6px;
 }
 
+#cancelNoteButton {
+	background-color: #333333;
+	color: white;
+	padding: 10px 90px 10px 6px;
+}
+
 #notePrompt {
 	background-color: #333333;
 	position: absolute;
