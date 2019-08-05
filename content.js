@@ -51,12 +51,13 @@ function getSelectedAsString() {
   return getSelected().toString();
 }
 
-function createHoverButton(icon) {
+function createHoverButton(icon, title) {
   var hoverButton = document.createElement("input");
   hoverButton.setAttribute("type", "image");
   hoverButton.setAttribute("src", icon);
   hoverButton.setAttribute("width", "24");
   hoverButton.setAttribute("height", "24");
+  hoverButton.setAttribute("title", title);
 
   return hoverButton;
 }
@@ -71,19 +72,19 @@ function showPopup() {
   var ul = document.createElement('ul');
   ul.id = "tooltipButtons"
 
-  var selectionLI = document.createElement('li');
+  var highlightLI = document.createElement('li');
   var noteLI = document.createElement('li');
 
-  selectionLI.id = "selectionTooltip"
+  highlightLI.id = "highlightTooltip"
   noteLI.id = "noteTooltip"
 
-  var selectionIcon = chrome.runtime.getURL("images/highlight.png");
+  var highlightIcon = chrome.runtime.getURL("images/highlight.png");
   var noteIcon = chrome.runtime.getURL("images/note.png");
 
-  var selectionBtn = createHoverButton(selectionIcon)
-  var noteBtn  = createHoverButton(noteIcon)
+  var highlightBtn = createHoverButton(highlightIcon, "highlight")
+  var noteBtn  = createHoverButton(noteIcon, "add note")
 
-  selectionBtn.addEventListener("click", function() {
+  highlightBtn.addEventListener("click", function() {
     var selection = getSelected();
     var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
     var selectionString = selection.toString();
@@ -114,10 +115,10 @@ function showPopup() {
     }
   });
 
-  selectionLI.appendChild(selectionBtn);
+  highlightLI.appendChild(highlightBtn);
   noteLI.appendChild(noteBtn);
 
-  ul.appendChild(selectionLI);
+  ul.appendChild(highlightLI);
   ul.appendChild(noteLI);
 
   div.appendChild(ul);
