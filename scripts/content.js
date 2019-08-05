@@ -78,8 +78,8 @@ function showPopup() {
   highlightLI.id = "highlightTooltip"
   noteLI.id = "noteTooltip"
 
-  var highlightIcon = chrome.runtime.getURL("images/highlight.png");
-  var noteIcon = chrome.runtime.getURL("images/note.png");
+  var highlightIcon = chrome.runtime.getURL("public/images/highlight.png");
+  var noteIcon = chrome.runtime.getURL("public/images/note.png");
 
   var highlightBtn = createHoverButton(highlightIcon, "highlight")
   var noteBtn  = createHoverButton(noteIcon, "add note")

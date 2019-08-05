@@ -50,7 +50,7 @@ function addListenerToTrashNode(trashIcon, listItem, url) {
 function constructTrashIconNode() {
   var trashButton = document.createElement("input");
   trashButton.type = "image";
-  trashButton.src = './icons/trash32.png';
+  trashButton.src = 'public/icons/trash32.png';
   trashButton.className = 'trash-icon-hidden';
 
   return trashButton;
