@@ -88,14 +88,13 @@ function showPopup() {
   ul.style.margin = "0px";
 
 
-  var li_search = document.createElement('li');
+  // var li_search = document.createElement('li');
   var li_copy = document.createElement('li');
-
   var li_twitter = document.createElement('li');
 
 
-  li_search.style.padding  = "0px 5px 0px 0px";
-  li_search.style.margin = "0px";
+  // li_search.style.padding  = "0px 5px 0px 0px";
+  // li_search.style.margin = "0px";
 
   li_copy.style.padding  = "0px 5px 0px 0px";
   li_copy.style.margin = "0px";
@@ -104,33 +103,33 @@ function showPopup() {
   li_twitter.style.margin = "0px";
 
 
-  li_search.style.display = "inline";
+  // li_search.style.display = "inline";
   li_copy.style.display = "inline";
   li_twitter.style.display = "inline";
 
 
-  var searchIcon = chrome.runtime.getURL("images/search.png");
+  // var searchIcon = chrome.runtime.getURL("images/search.png");
   var copyIcon = chrome.runtime.getURL("images/copy.png");
   var twitterIcon = chrome.runtime.getURL("images/twitter.png");
 
-  var searchBtn = createHoverButton(searchIcon)
+  // var searchBtn = createHoverButton(searchIcon)
   var copyBtn = createHoverButton(copyIcon)
   var twitterBtn  = createHoverButton(twitterIcon)
 
-  searchBtn.addEventListener("click", function() {
-    var selection = getSelected();
-    var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
-    var selectionString = selection.toString();
+  // searchBtn.addEventListener("click", function() {
+  //   var selection = getSelected();
+  //   var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
+  //   var selectionString = selection.toString();
 
-    if(selection != '') {
-      var activeNode = selection.focusNode.parentElement;
-      StorageManager.saveSelected(location.href, document.title, selectionString, pathStack, function() { 
-        setHighlights(pathStack, selectionString);
-      });
+  //   if(selection != '') {
+  //     var activeNode = selection.focusNode.parentElement;
+  //     StorageManager.saveSelected(location.href, document.title, selectionString, pathStack, function() { 
+  //       setHighlights(pathStack, selectionString);
+  //     });
 
-      clearSelection()
-    }
-  });
+  //     clearSelection()
+  //   }
+  // });
 
   copyBtn.addEventListener("click", function() {
     var selection = getSelected();
@@ -164,11 +163,11 @@ function showPopup() {
     }
   });
 
-  li_search.appendChild(searchBtn);
+  // li_search.appendChild(searchBtn);
   li_copy.appendChild(copyBtn);
   li_twitter.appendChild(twitterBtn);
 
-  ul.appendChild(li_search);
+  // ul.appendChild(li_search);
   ul.appendChild(li_copy);
   ul.appendChild(li_twitter);
 
@@ -212,6 +211,8 @@ function promptNote(callback) {
   var inputDiv = document.createElement("div");
   var inputNode = document.createElement("input");
   var inputButton = document.createElement("input");
+  var mybreak = document.createElement('br');
+
   
   inputNode.type = "text";
   inputNode.id = "noteInputBox";
@@ -220,6 +221,7 @@ function promptNote(callback) {
   inputButton.value = "save";
 
   inputDiv.appendChild(inputNode);
+  inputDiv.appendChild(mybreak);
   inputDiv.appendChild(inputButton);
 
   inputDiv.id = 'notePrompt';
@@ -228,10 +230,24 @@ function promptNote(callback) {
   inputDiv.style.boxSizing = 'content-box';
   inputDiv.style.left = pageX+'px';
   inputDiv.style.top = pageY+'px';
-  inputDiv.style.padding = "6px 6px 0px 6px";
+  inputDiv.style.padding = "0px 0px 20px 6px";
   inputDiv.style.display = "inherit";
   inputDiv.style.borderRadius = "6px";
   inputDiv.style.zIndex = '200000001';
+
+  inputNode.style.backgroundColor = '#333333';
+  inputNode.style.padding = "70px 85px 70px 6px";
+  inputNode.style.color = 'white';
+
+  inputButton.style.backgroundColor = '#333333';
+  inputButton.style.color = 'white';
+  inputButton.style.padding = "10px 90px 10px 6px";
+
+
+
+
+
+ 
 
   document.body.appendChild(inputDiv);
 
