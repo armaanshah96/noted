@@ -1,4 +1,54 @@
+#tooltip {
+  background-color: #333333;
+  position: absolute;
+  box-sizing: content-box;
+  padding: 6px 6px 0px 6px;
+  display: none;
+  border-radius: 6px;
+  z-index: 100000001;
+}
+
+#tooltipButtons {
+	list-style-type:  none;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#selectionTooltip {
+  padding: 0px 5px 0px 0px;
+  margin: 0px;
+  display: inline;
+}
+
+#noteTooltip {
+  padding: 0px;
+  margin: 0px;
+  display: inline;
+}
+
+#noteInputBox {
+	background-color: #333333;
+	padding: 70px 85px 70px 6px;
+	color: white;	
+}
+
+#saveNoteButton {
+	background-color: #333333;
+	color: white;
+	padding: 10px 90px 10px 6px;
+}
+
+#notePrompt {
+	background-color: #333333;
+	position: absolute;
+	box-sizing: content-box;
+	padding: 0px 0px 20px 6px;
+	display: inherit;
+	border-radius: 6px;
+	z-index: 200000001;
+}
+
 m.highlighted {
 	background-color: rbg(192,242,245);
-	
 }

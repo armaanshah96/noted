@@ -2,10 +2,6 @@ var pageX;
 var pageY;
 var isShown = false;
 
-icons = {
-  "search": chrome.runtime.getURL("images/search.png")
-}
-
 //mousedown event start
 document.addEventListener("mousedown", function(event){
   //right click
@@ -14,7 +10,7 @@ document.addEventListener("mousedown", function(event){
     pageY = event.pageY - 55;
 
     if(isShown) {
-      $("#myDiv").fadeOut(300, function(){
+      $("#tooltip").fadeOut(300, function(){
         $(this).remove();
       });
 
@@ -68,70 +64,26 @@ function createHoverButton(icon) {
 //make and show popup
 function showPopup() {
   var div = document.createElement( 'div' );
-  div.id = 'myDiv';
-  div.style.backgroundColor = '#333333';
-  div.style.position = "absolute";
-  div.style.boxSizing = 'content-box';
+  div.id = 'tooltip';
   div.style.left = pageX+'px';
   div.style.top = pageY+'px';
-  div.style.padding = "6px 6px 0px 6px";
-  div.style.display = "none";
-  div.style.borderRadius = "6px";
-  div.style.zIndex = '100000001';
-
 
   var ul = document.createElement('ul');
+  ul.id = "tooltipButtons"
 
-  ul.style.listStyleType =  "none";
-  ul.style.listStyle = "none";
-  ul.style.padding  = "0px";
-  ul.style.margin = "0px";
+  var selectionLI = document.createElement('li');
+  var noteLI = document.createElement('li');
 
+  selectionLI.id = "selectionTooltip"
+  noteLI.id = "noteTooltip"
 
-  // var li_search = document.createElement('li');
-  var li_copy = document.createElement('li');
-  var li_twitter = document.createElement('li');
+  var selectionIcon = chrome.runtime.getURL("images/highlight.png");
+  var noteIcon = chrome.runtime.getURL("images/note.png");
 
+  var selectionBtn = createHoverButton(selectionIcon)
+  var noteBtn  = createHoverButton(noteIcon)
 
-  // li_search.style.padding  = "0px 5px 0px 0px";
-  // li_search.style.margin = "0px";
-
-  li_copy.style.padding  = "0px 5px 0px 0px";
-  li_copy.style.margin = "0px";
-
-  li_twitter.style.padding  = "0px";
-  li_twitter.style.margin = "0px";
-
-
-  // li_search.style.display = "inline";
-  li_copy.style.display = "inline";
-  li_twitter.style.display = "inline";
-
-
-  // var searchIcon = chrome.runtime.getURL("images/search.png");
-  var copyIcon = chrome.runtime.getURL("images/copy.png");
-  var twitterIcon = chrome.runtime.getURL("images/twitter.png");
-
-  // var searchBtn = createHoverButton(searchIcon)
-  var copyBtn = createHoverButton(copyIcon)
-  var twitterBtn  = createHoverButton(twitterIcon)
-
-  // searchBtn.addEventListener("click", function() {
-  //   var selection = getSelected();
-  //   var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
-  //   var selectionString = selection.toString();
-
-  //   if(selection != '') {
-  //     var activeNode = selection.focusNode.parentElement;
-  //     StorageManager.saveSelected(location.href, document.title, selectionString, pathStack, function() { 
-  //       setHighlights(pathStack, selectionString);
-  //     });
-
-  //     clearSelection()
-  //   }
-  // });
-
-  copyBtn.addEventListener("click", function() {
+  selectionBtn.addEventListener("click", function() {
     var selection = getSelected();
     var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
     var selectionString = selection.toString();
@@ -146,8 +98,7 @@ function showPopup() {
     }
   });
 
-
-  twitterBtn.addEventListener("click", function() {
+  noteBtn.addEventListener("click", function() {
     var selection = getSelected();
     var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
     var selectionString = selection.toString();
@@ -163,19 +114,17 @@ function showPopup() {
     }
   });
 
-  // li_search.appendChild(searchBtn);
-  li_copy.appendChild(copyBtn);
-  li_twitter.appendChild(twitterBtn);
+  selectionLI.appendChild(selectionBtn);
+  noteLI.appendChild(noteBtn);
 
-  // ul.appendChild(li_search);
-  ul.appendChild(li_copy);
-  ul.appendChild(li_twitter);
+  ul.appendChild(selectionLI);
+  ul.appendChild(noteLI);
 
   div.appendChild(ul);
 
   document.body.appendChild( div );
 
-  $("#myDiv").fadeIn(300);
+  $("#tooltip").fadeIn(300);
 
   isShown = true;
 }
@@ -209,50 +158,28 @@ function setHighlights(pathStack, selection) {
 
 function promptNote(callback) {
   var inputDiv = document.createElement("div");
-  var inputNode = document.createElement("input");
+  var inputTextBox = document.createElement("input");
   var inputButton = document.createElement("input");
-  var mybreak = document.createElement('br');
-
+  var divider = document.createElement('br');
   
-  inputNode.type = "text";
-  inputNode.id = "noteInputBox";
+  inputTextBox.type = "text";
+  inputTextBox.id = "noteInputBox";
   inputButton.type = "button";
   inputButton.id = "saveNoteButton";
   inputButton.value = "save";
 
-  inputDiv.appendChild(inputNode);
-  inputDiv.appendChild(mybreak);
+  inputDiv.appendChild(inputTextBox);
+  inputDiv.appendChild(divider);
   inputDiv.appendChild(inputButton);
 
   inputDiv.id = 'notePrompt';
-  inputDiv.style.backgroundColor = '#333333';
-  inputDiv.style.position = "absolute";
-  inputDiv.style.boxSizing = 'content-box';
   inputDiv.style.left = pageX+'px';
   inputDiv.style.top = pageY+'px';
-  inputDiv.style.padding = "0px 0px 20px 6px";
-  inputDiv.style.display = "inherit";
-  inputDiv.style.borderRadius = "6px";
-  inputDiv.style.zIndex = '200000001';
-
-  inputNode.style.backgroundColor = '#333333';
-  inputNode.style.padding = "70px 85px 70px 6px";
-  inputNode.style.color = 'white';
-
-  inputButton.style.backgroundColor = '#333333';
-  inputButton.style.color = 'white';
-  inputButton.style.padding = "10px 90px 10px 6px";
-
-
-
-
-
  
-
   document.body.appendChild(inputDiv);
 
   inputButton.addEventListener("click", function() {
-    var noteResult = inputNode.value;
+    var noteResult = inputTextBox.value;
     console.debug("inner text of input element is : " + noteResult);
     inputDiv.remove();
     
