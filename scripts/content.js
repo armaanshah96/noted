@@ -159,13 +159,13 @@ function setHighlights(pathStack, selection) {
 
 function promptNote(callback) {
   var inputDiv = document.createElement("div");
-  var inputTextBox = document.createElement("input");
+  var textBox = document.createElement("textarea");
   var saveButton = document.createElement("input");
   var cancelButton = document.createElement("input");
   var divider = document.createElement('br');
   
-  inputTextBox.type = "text";
-  inputTextBox.id = "noteInputBox";
+  textBox.type = "text";
+  textBox.id = "noteTextBox";
   cancelButton.type = "button";
   cancelButton.id = "cancelNoteButton";
   cancelButton.value = "cancel";
@@ -173,7 +173,7 @@ function promptNote(callback) {
   saveButton.id = "saveNoteButton";
   saveButton.value = "save";
 
-  inputDiv.appendChild(inputTextBox);
+  inputDiv.appendChild(textBox);
   inputDiv.appendChild(divider);
   inputDiv.appendChild(saveButton);
   inputDiv.appendChild(cancelButton);
@@ -185,7 +185,7 @@ function promptNote(callback) {
   document.body.appendChild(inputDiv);
 
   saveButton.addEventListener("click", function() {
-    var noteResult = inputTextBox.value;
+    var noteResult = textBox.value;
     console.debug("inner text of input element is : " + noteResult);
     inputDiv.remove();
     
