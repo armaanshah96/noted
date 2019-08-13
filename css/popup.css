@@ -4,8 +4,10 @@ ul {
 
 }
 
-body{
-    width:500px;
+@font-face {
+    font-family: "Nunito";
+    src: url(../public/fonts/Nunito-Regular.woff) format("woff"),
+         url(../public/fonts/Nunito-Regular.ttf) format("truetype");
 }
 
 li {
@@ -197,8 +199,9 @@ section {
 }
 
 body {
+    width:500px;
     margin: 0;
-    font-family: "Open Sans", sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "Nunito", sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.538;
