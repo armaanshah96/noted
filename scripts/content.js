@@ -166,6 +166,9 @@ function promptNote(callback) {
   
   textBox.type = "text";
   textBox.id = "noteTextBox";
+  textBox.cols = 30;
+  textBox.rows = 4;
+  textBox.autofocus = true;
   cancelButton.type = "button";
   cancelButton.id = "cancelNoteButton";
   cancelButton.value = "cancel";
@@ -175,8 +178,8 @@ function promptNote(callback) {
 
   inputDiv.appendChild(textBox);
   inputDiv.appendChild(divider);
-  inputDiv.appendChild(saveButton);
   inputDiv.appendChild(cancelButton);
+  inputDiv.appendChild(saveButton);
 
   inputDiv.id = 'notePrompt';
   inputDiv.style.left = pageX+'px';
