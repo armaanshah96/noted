@@ -8,8 +8,8 @@
       "default_icon": "public/icons/icon128.png"
    },
    "content_scripts": [ {
-      "js": [ 
-         "packages/jquery-3.1.0.min.js", 
+      "js": [
+         "packages/jquery-3.1.0.min.js",
          "scripts/DomParser.js",
          "scripts/StorageManager.js",
          "scripts/content.js"
@@ -29,6 +29,6 @@
    "name": "Understood",
    "permissions": [ "activeTab", "\u003Call_urls>", "tabs", "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "2.0",
+   "version": "0.1",
    "web_accessible_resources": [ "public/images/*.png" ]
 }
