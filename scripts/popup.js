@@ -14,8 +14,23 @@ StorageManager.retrieveAllText(function(items) {
 
     for(var saved of webpage) {
       (function() {
-        var listItem = constructNodeWithText("LI", constructTextFromDataObj(saved));
+
+        var listItem = document.createElement("LI");
+        var quoteIcon = constructQuoteIconNode();
+        var selectionItem = constructNodeWithText("P", saved.selection);
+        selectionItem.className += "project-item-selection";
+
+        if(saved.note !== undefined) {
+          var noteItem = constructNodeWithText("P", saved.note);
+          noteItem.className += "project-item-note offset-1";
+
+          selectionItem.appendChild(noteItem);
+        }
+
         listItem.className += "project-item-title";
+
+        listItem.append(quoteIcon);
+        listItem.append(selectionItem);
 
         var trashIcon = constructTrashIconNode();
         addListenerToTrashNode(trashIcon, listItem, urlKey);
@@ -33,22 +48,31 @@ StorageManager.retrieveAllText(function(items) {
 
 function addListenerToTrashNode(trashIcon, listItem, url) {
   trashIcon.addEventListener("click", function() {
+
     var i = 0;
     var item = listItem;
+
     while( (item = item.previousSibling) != null) {
       if(item.nodeName.toLowerCase() === 'li') {
         i++;
       }
     }
 
-    console.log("COUNT IS : " + i);
-
     StorageManager.deleteTextInKey(url, (STORAGE_OFFSET + i), function() { location.reload(); });
   });
 }
 
+function constructQuoteIconNode() {
+  var quoteImg = document.createElement("img");
+  quoteImg.src = 'public/icons/quote16.png';
+  quoteImg.className += "quote-icon"
+
+  return quoteImg;
+}
+
 function constructTrashIconNode() {
   var trashButton = document.createElement("input");
+
   trashButton.type = "image";
   trashButton.src = 'public/icons/trash32.png';
   trashButton.className = 'trash-icon-hidden';
@@ -86,16 +110,6 @@ function constructNodeWithText(type, text) {
   node.appendChild(textNode);
 
   return node;
-}
-
-function constructTextFromDataObj(text) {
-  var fullText = text.selection;
-
-  if(text.note !== undefined) {
-    fullText = '(Selection =) ' + text.selection + ': (Note =) ' + text.note;
-  } 
-
-  return fullText;
 }
 
 function extractUrlHostname(url) {

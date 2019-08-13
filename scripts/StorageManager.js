@@ -41,8 +41,7 @@ var StorageManager = function(){
   }
 
   function deleteTextInKey(url, textIndex, callback) {
-    console.log(url)
-    console.log(textIndex)
+    
     retrieveTextByKey(url, function(existingSavedText) {
       existingSavedText.splice(textIndex,1);
       console.log(existingSavedText);

@@ -40,14 +40,21 @@ h6 {
     margin: 0;
 }
 
+.quote-icon {
+    padding-right: 5px;
+    height: 16px;
+}
+
 .trash-icon-hidden {
     display: none;
 }
 
 .trash-icon-visible {
-    width: fit-content;
+    height: 32px;
+    width: 32px;
     padding: 5px;
     display: inline;
+    margin-left: auto;
 }
 
 ::-webkit-scrollbar {
@@ -24483,9 +24490,18 @@ fieldset[disabled] .full-calendar .fc-button:hover {
     flex: 0 1 20%;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
     padding-right: 5px
+    color: #5b5b5b;
+    justify-content: flex-start;
+}
+
+.project-item-selection {
+    flex-direction: column;
+}
+
+.project-item-note {
+    color: #242424;
+    padding-top: 10px;
 }
 
 @media (max-width:767.98px) {

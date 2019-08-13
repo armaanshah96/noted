@@ -189,7 +189,7 @@ function promptNote(callback) {
     console.debug("inner text of input element is : " + noteResult);
     inputDiv.remove();
     
-    callback();
+    callback(noteResult);
   });
 
 
