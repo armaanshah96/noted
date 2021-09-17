@@ -64,7 +64,7 @@ function addListenerToTrashNode(trashIcon, listItem, url) {
       }
     }
 
-    storageManager.deleteTextInKey(url, (STORAGE_OFFSET + i), function() { location.reload(); });
+    storageManager.deleteNote(url, (STORAGE_OFFSET + i), function() { location.reload(); });
   });
 }
 

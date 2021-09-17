@@ -8,7 +8,7 @@ export class StorageManager {
     });
   }
 
-  saveNote(note) {
+  updateNote(note) {
     return new Promise((resolve, reject) => {
       chrome.storage.sync.set(note, () => {
         resolve();
@@ -16,9 +16,17 @@ export class StorageManager {
     });
   }
 
+  removeNoteCategory(key) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.sync.remove(key, function () {
+        resolve();
+      });
+    });
+  }
+
   saveSelected(url, title, text, pathStack, callback, note) {
     this.retrieveNotes(url)
-      .then((savedText) => {
+      .then(savedText => {
         savedText =
           savedText && savedText.length > 0 ? savedText : [{ title: title }];
 
@@ -27,7 +35,7 @@ export class StorageManager {
           : { selection: text, path: pathStack };
         const noteToSave = { [url]: savedText.concat(textObj) };
 
-        return this.saveNote(noteToSave);
+        return this.updateNote(noteToSave);
       })
       .then(() => {
         note && alert("Saved your note");
@@ -35,27 +43,20 @@ export class StorageManager {
       });
   }
 
-  deleteTextInKey(url, textIndex, callback) {
-    this.retrieveNotes(url).then(function (existingSavedText) {
-      existingSavedText.splice(textIndex, 1);
-      console.log(existingSavedText);
-      if (existingSavedText < 1) {
-        console.error("Storage under this URL is in an unexpected state");
-      } else if (existingSavedText.length === 1) {
-        // Only {title: ""} object remains, remove from storage because not tracking any data
-        chrome.storage.sync.remove(url, function () {
-          console.log("No more remaining notes or highlights under this url");
-          callback();
-        });
-      } else {
-        // Maintain existing data by overwrite storage contents in key
-        chrome.storage.sync.set({ [url]: existingSavedText }, function () {
-          console.log(
-            "Removed highlight and/or note from saved content for this url"
-          );
-          callback();
-        });
-      }
-    });
+  deleteNote(url, textIndex, callback) {
+    this.retrieveNotes(url)
+      .then(existingSavedText => {
+        existingSavedText.splice(textIndex, 1);
+        console.log(existingSavedText);
+        if (existingSavedText < 1) {
+          console.error("Storage under this URL is in an unexpected state");
+        } else if (existingSavedText.length === 1) {
+          return this.removeNoteCategory(url);
+        } else {
+          // Maintain existing data by overwrite storage contents in key
+          return this.updateNote({ [url]: existingSavedText });
+        }
+      })
+      .then(() => callback());
   }
 }
