@@ -20,7 +20,4 @@ module.exports = {
     },
     devtool: 'cheap-module-source-map',
     // allows appliications on generated output
-    plugins: [
-        new CleanPlugin.CleanWebpackPlugin()
-    ]
 }

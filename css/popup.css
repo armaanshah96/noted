@@ -38,10 +38,6 @@ h6 {
     font-weight: 400
 }
 
-.no-margin {
-    margin: 0;
-}
-
 .quote-icon {
     padding-right: 5px;
     height: 16px;
@@ -24423,12 +24419,12 @@ fieldset[disabled] .full-calendar .fc-button:hover {
 
 .project-list {
     background-color: transparent;
-    margin-bottom: 29px
+    margin: 2em 0;
 }
 
 .project-list-title {
-    font-size: 1.38462rem;
-    margin-bottom: 28px;
+    font-size: 20px;
+    margin-bottom: 1em;
 }
 
 .project-item {
