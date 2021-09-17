@@ -4,12 +4,20 @@ import { constructNodeWithText } from "../UIUtil";
 export function createNoteItem(noteData, urlKey) {
   const listItem = document.createElement("li");
   const quoteIcon = constructQuoteIconNode();
-  const selectionItem = constructNodeWithText("p", noteData.selection, "project-item-selection");
+  const selectionItem = constructNodeWithText(
+    "p",
+    noteData.selection,
+    "project-item-selection"
+  );
   const trashIcon = constructTrashIconNode();
   addListenersToTrashNode(trashIcon, listItem, urlKey, noteData.selection);
 
   if (noteData.note) {
-    const noteItem = constructNodeWithText("p", noteData.note, "project-item-note offset-1");
+    const noteItem = constructNodeWithText(
+      "p",
+      noteData.note,
+      "project-item-note offset-1"
+    );
 
     selectionItem.append(noteItem);
   }
@@ -42,7 +50,7 @@ function addListenersToTrashNode(trashIcon, listItem, url, selection) {
 function constructQuoteIconNode() {
   const quoteImg = document.createElement("img");
   quoteImg.src = "public/icons/quote16.png";
-  quoteImg.classList.add( "quote-icon");
+  quoteImg.classList.add("quote-icon");
 
   return quoteImg;
 }

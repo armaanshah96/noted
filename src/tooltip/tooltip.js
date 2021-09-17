@@ -1,6 +1,6 @@
 import {
   getSelectionHorizontalCoordinate,
-  getSelectionVerticalCoordinate,
+  getSelectionVerticalCoordinate
 } from "../services/SelectionService";
 import { createTooltipItem } from "./TooltipItem";
 

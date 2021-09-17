@@ -29,9 +29,7 @@ export const saveSelected = (url, title, text, note) => {
       savedText =
         savedText && savedText.length > 0 ? savedText : [{ title: title }];
 
-      const textObj = note
-        ? { selection: text, note }
-        : { selection: text };
+      const textObj = note ? { selection: text, note } : { selection: text };
       const noteToSave = { [url]: savedText.concat(textObj) };
 
       return updateNote(noteToSave);
@@ -44,7 +42,9 @@ export const saveSelected = (url, title, text, note) => {
 export const deleteNote = (url, selectionToDelete, callback) => {
   retrieveNotes(url)
     .then((existingSavedText) => {
-      const deleteIndex = existingSavedText.findIndex(notes => notes.selection === selectionToDelete)
+      const deleteIndex = existingSavedText.findIndex(
+        (notes) => notes.selection === selectionToDelete
+      );
       existingSavedText.splice(deleteIndex, 1);
 
       if (existingSavedText < 1) {

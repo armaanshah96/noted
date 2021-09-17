@@ -1,5 +1,5 @@
 export function createHoverButton(icon, title) {
-  var hoverButton = document.createElement("input");
+  const hoverButton = document.createElement("input");
   hoverButton.setAttribute("type", "image");
   hoverButton.setAttribute("src", icon);
   hoverButton.setAttribute("width", "24");

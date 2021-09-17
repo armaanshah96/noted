@@ -1,8 +1,6 @@
 import { getSelected } from "./services/SelectionService";
 import {
-  renderTooltip,
-  removeTooltip,
-  tooltipVisible,
+  removeTooltip, renderTooltip, tooltipVisible
 } from "./tooltip/Tooltip";
 
 document.documentElement.addEventListener("mousedown", function (event) {
@@ -16,7 +14,7 @@ document.documentElement.addEventListener("mousedown", function (event) {
 
 document.documentElement.addEventListener("mouseup", function (event) {
   if (event.button === 0) {
-    var selection = getSelected().toString();
+    const selection = getSelected().toString();
     if (selection !== "" && !tooltipVisible()) {
       renderTooltip();
     }

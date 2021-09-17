@@ -1,5 +1,5 @@
 export function getSelected() {
-  var selection = '';
+  let selection = "";
 
   if (window.getSelection) {
     selection = window.getSelection();
@@ -11,15 +11,15 @@ export function getSelected() {
 }
 
 export function clearSelection() {
-  if ( window.getSelection ) {
+  if (window.getSelection) {
     window.getSelection().removeAllRanges();
   }
 }
 
 export function getSelectionVerticalCoordinate() {
-    return getSelected().getRangeAt(0).getBoundingClientRect().y + window.scrollY;
+  return getSelected().getRangeAt(0).getBoundingClientRect().y + window.scrollY;
 }
 
 export function getSelectionHorizontalCoordinate() {
-    return getSelected().getRangeAt(0).getBoundingClientRect().x;
+  return getSelected().getRangeAt(0).getBoundingClientRect().x;
 }
