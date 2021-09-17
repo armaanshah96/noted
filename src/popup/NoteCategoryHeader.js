@@ -1,4 +1,4 @@
-import { constructNodeWithText } from "./UIUtil";
+import { constructNodeWithText } from "../UIUtil";
 
 export function createNoteCategoryHeader(url, titleText) {
   const container = document.createElement("div");

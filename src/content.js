@@ -1,6 +1,7 @@
-import { saveSelected } from "./popup/StorageManager";
+import { saveSelected } from "./services/StorageService";
 import { DomParser
  } from "./DomParser";
+import { clearSelection, getSelected } from "./services/SelectionService";
 
 var pageX;
 var pageY;
@@ -30,7 +31,7 @@ document.addEventListener("mousedown", function(event){
 document.addEventListener("mouseup", function(event){
   //right click
   if(event.button == 0) {
-    var selection =  getSelectedAsString();
+    var selection =  getSelected().toString();
     if(selection != '') {
       showPopup();
     }
@@ -38,24 +39,6 @@ document.addEventListener("mouseup", function(event){
 }, true);
 //mouseup event ends
 
-// this function gets selected text in clipboard
-function getSelected() {
-  var t = '';
-
-  if (window.getSelection) {
-    t = window.getSelection();
-  } else if (document.getSelection) {
-    t = document.getSelection();
-  } else if (document.selection) {
-    t = document.selection.createRange().text;
-  }
-
-  return t;
-}
-
-function getSelectedAsString() {
-  return getSelected().toString();
-}
 
 function createHoverButton(icon, title) {
   var hoverButton = document.createElement("input");
@@ -69,6 +52,7 @@ function createHoverButton(icon, title) {
 }
 
 //make and show popup
+// RENDER TOOLTIP
 function showPopup() {
   var div = document.createElement( 'div' );
   div.id = 'tooltip';
@@ -95,7 +79,7 @@ function showPopup() {
     var pathStack = domParser.generateDomPath(selection.focusNode.parentElement);
     var selectionString = selection.toString();
 
-    if(selection != '') {
+    if(selectionString != '') {
       document.execCommand('copy');
       saveSelected(location.href, document.title, selectionString, pathStack, function() { 
           setHighlights(pathStack, selectionString)
@@ -110,7 +94,7 @@ function showPopup() {
     var pathStack = domParser.generateDomPath(selection.focusNode.parentElement);
     var selectionString = selection.toString();
 
-    if(selection != '') {
+    if(selectionString != '') {
       promptNote(function(note) {
         saveSelected(location.href, document.title, selectionString , pathStack, function() {
           setHighlights(pathStack, selectionString)
@@ -205,18 +189,4 @@ function promptNote(callback) {
     console.debug("Note was cancelled");
     inputDiv.remove();
   });
-}
-
-function popupCenter(url, title, w, h) {
-  var left = (screen.width/2)-(w/2);
-  var top = (screen.height/2)-(h/2);
-  return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-}
-
-function clearSelection() {
-  if ( document.selection ) {
-    document.selection.empty();
-  } else if ( window.getSelection ) {
-    window.getSelection().removeAllRanges();
-  }
 }

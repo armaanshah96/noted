@@ -1,4 +1,4 @@
-import { deleteNote } from "./StorageManager";
+import { deleteNote } from "../services/StorageService";
 import { constructNodeWithText } from "../UIUtil";
 
 export function createNoteItem(noteData, urlKey) {

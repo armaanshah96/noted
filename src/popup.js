@@ -1,4 +1,4 @@
-import { retrieveNotes } from "./popup/StorageManager";
+import { retrieveNotes } from "./services/StorageService";
 import { noteCategoryElement  } from "./popup/NoteCategory";
 
 const render = () => {
