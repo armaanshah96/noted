@@ -1,18 +1,18 @@
-var StorageManager = function(){
-  function retrieveTextByKey(key, callback) {
+export class StorageManager {
+  retrieveTextByKey(key, callback) {
     chrome.storage.sync.get(key, function(items) {
       typeof callback === 'function' && callback(items[key])
     });
   }
 
-  function retrieveAllText(callback) {
+  retrieveAllText(callback) {
     chrome.storage.sync.get(null, function(items) {
       callback(items);
     });
   }
 
-  function saveSelected(url, title, text, pathStack, callback) {
-    retrieveTextByKey(url, function(existingSavedText) {
+  saveSelected(url, title, text, pathStack, callback) {
+    this.retrieveTextByKey(url, function(existingSavedText) {
       existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : [{title: title}]
 
       var textObj = { selection: text, path: pathStack };
@@ -25,8 +25,8 @@ var StorageManager = function(){
     })
   }
 
-  function saveSelectedWithNote(url, title, selection, note, pathStack, callback) {
-    retrieveTextByKey(url, function(existingSavedText) {
+  saveSelectedWithNote(url, title, selection, note, pathStack, callback) {
+    this.retrieveTextByKey(url, function(existingSavedText) {
       existingSavedText = (existingSavedText && existingSavedText.length > 0) ? existingSavedText : [{title: title}]
 
       var textAndNote = { selection: selection, note: note, path: pathStack };
@@ -40,9 +40,8 @@ var StorageManager = function(){
     })
   }
 
-  function deleteTextInKey(url, textIndex, callback) {
-    
-    retrieveTextByKey(url, function(existingSavedText) {
+  deleteTextInKey(url, textIndex, callback) {
+    this.retrieveTextByKey(url, function(existingSavedText) {
       existingSavedText.splice(textIndex,1);
       console.log(existingSavedText);
       if(existingSavedText < 1) {
@@ -62,12 +61,4 @@ var StorageManager = function(){
       }
     });
   }
-
-  return {
-    retrieveTextByKey: retrieveTextByKey,
-    retrieveAllText: retrieveAllText,
-    saveSelected: saveSelected,
-    saveSelectedWithNote: saveSelectedWithNote,
-    deleteTextInKey: deleteTextInKey
-  }
-}();
+}

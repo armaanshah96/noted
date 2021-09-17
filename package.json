@@ -1,0 +1,29 @@
+{
+  "name": "noted",
+  "version": "1.0.0",
+  "description": "",
+  "main": "background.js",
+  "dependencies": {},
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "web-dev-server": "^3.0.22",
+    "webpack": "4.46.0",
+    "webpack-cli": "^4.8.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "build:dev": "webpack-dev-server",
+    "build:prod": "webpack --config webpack.config.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/armaanshah96/noted.git"
+  },
+  "author": "Armaan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/armaanshah96/noted/issues"
+  },
+  "homepage": "https://github.com/armaanshah96/noted#readme"
+}

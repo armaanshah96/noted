@@ -1,5 +1,5 @@
-var DomParser = function() {
-  function generateDomPath(el) {
+export class DomParser {
+  generateDomPath(el) {
     var stack = [];
     while ( el.parentNode != null ) {
       console.log(el.nodeName);
@@ -26,11 +26,11 @@ var DomParser = function() {
     return stack.slice(1);
   }
 
-  function findNodeByPath(pathStack) {
+  findNodeByPath(pathStack) {
     var path = document.firstElementChild;
 
-    pathStack.forEach(function(tag) {
-      var nodeDetails = tagType(tag)
+    pathStack.forEach((tag) => {
+      var nodeDetails = this.tagType(tag)
 
       if(nodeDetails.type === "ID") {
         path = document.getElementById(nodeDetails.value)
@@ -39,7 +39,7 @@ var DomParser = function() {
         var i = 0;
 
         for(var child of path.childNodes) {
-          var nodeName = extractNodeNameFromSiblingTag(tag);
+          var nodeName = this.extractNodeNameFromSiblingTag(tag);
 
           if(child.nodeName.toLowerCase() === nodeName) {
             
@@ -67,25 +67,25 @@ var DomParser = function() {
     return path;
   }
 
-  function tagType(tag) {
+  tagType(tag) {
     var id = tag.indexOf("#");
     var sib = tag.indexOf(":eq(")
     if(id > -1) {
-      var idString = extractID(tag, id)
+      var idString = this.extractID(tag, id)
       return {type: "ID", value: idString};
     } else if(sib > -1) {
-      var sibIndex = extractSibIndex(tag, sib);
+      var sibIndex = this.extractSibIndex(tag, sib);
       return {type: "SIBLING", value: sibIndex};
     }
 
     return {type: "PLAIN_NODE"};
   }
 
-  function extractID(tag, id) {
+  extractID(tag, id) {
     return tag.substring(id+1);
   }
 
-  function extractSibIndex(tag) {
+  extractSibIndex(tag) {
     var identifier = ":eq(";
     var start = tag.indexOf(identifier) + identifier.length;
     var end = tag.indexOf(")");
@@ -93,12 +93,7 @@ var DomParser = function() {
     return parseInt(tag.substring(start,end));
   }
 
-  function extractNodeNameFromSiblingTag(tag) {
+  extractNodeNameFromSiblingTag(tag) {
     return tag.substring(0, tag.indexOf(":eq("));
   }
-
-  return {
-    generateDomPath: generateDomPath,
-    findNodeByPath: findNodeByPath
-  }
-}();
+};

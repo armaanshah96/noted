@@ -10,9 +10,7 @@
    "content_scripts": [ {
       "js": [
          "packages/jquery-3.1.0.min.js",
-         "scripts/DomParser.js",
-         "scripts/StorageManager.js",
-         "scripts/content.js"
+         "assets/scripts/content.js"
       ],
       "css": ["css/content.css"],
       "matches": [ "\u003Call_urls>" ]

@@ -1,6 +1,12 @@
-var STORAGE_OFFSET = 1;
+import { StorageManager
+ } from "./StorageManager";
 
-StorageManager.retrieveAllText(function(items) {
+var STORAGE_OFFSET = 1;
+let storageManager = new StorageManager();
+
+storageManager.retrieveAllText(function(items) {
+  const button = exportEl();
+  document.body.append(button);
 	for(var urlKey of Object.keys(items)) {
     var webpage = items[urlKey];
     var titleText = hasTitle(webpage[0]) ? webpage.shift().title : undefined;
@@ -58,7 +64,7 @@ function addListenerToTrashNode(trashIcon, listItem, url) {
       }
     }
 
-    StorageManager.deleteTextInKey(url, (STORAGE_OFFSET + i), function() { location.reload(); });
+    storageManager.deleteTextInKey(url, (STORAGE_OFFSET + i), function() { location.reload(); });
   });
 }
 
@@ -110,6 +116,17 @@ function constructNodeWithText(type, text) {
   node.appendChild(textNode);
 
   return node;
+}
+
+function exportEl(items) {
+  const btn = document.createElement('button');
+  btn.textContent = 'export';
+  btn.addEventListener('click', exportData.bind(null, items));
+  return btn;
+}
+
+function exportData(items) {
+  console.log(items);
 }
 
 function extractUrlHostname(url) {

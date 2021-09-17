@@ -1,6 +1,14 @@
+import { StorageManager
+ } from "./StorageManager";
+import { DomParser
+ } from "./DomParser";
+
 var pageX;
 var pageY;
 var isShown = false;
+
+let storageManager = new StorageManager();
+let domParser = new DomParser();
 
 //mousedown event start
 document.addEventListener("mousedown", function(event){
@@ -86,12 +94,12 @@ function showPopup() {
 
   highlightBtn.addEventListener("click", function() {
     var selection = getSelected();
-    var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
+    var pathStack = domParser.generateDomPath(selection.focusNode.parentElement);
     var selectionString = selection.toString();
 
     if(selection != '') {
       document.execCommand('copy');
-      StorageManager.saveSelected(location.href, document.title, selectionString, pathStack, function() { 
+      storageManager.saveSelected(location.href, document.title, selectionString, pathStack, function() { 
           setHighlights(pathStack, selectionString)
       });
 
@@ -101,12 +109,12 @@ function showPopup() {
 
   noteBtn.addEventListener("click", function() {
     var selection = getSelected();
-    var pathStack = DomParser.generateDomPath(selection.focusNode.parentElement);
+    var pathStack = domParser.generateDomPath(selection.focusNode.parentElement);
     var selectionString = selection.toString();
 
     if(selection != '') {
       promptNote(function(note) {
-        StorageManager.saveSelectedWithNote(location.href, document.title, selectionString , note, pathStack, function() {
+        storageManager.saveSelectedWithNote(location.href, document.title, selectionString , note, pathStack, function() {
           setHighlights(pathStack, selectionString)
         });
       });
@@ -131,7 +139,7 @@ function showPopup() {
 }
 
 function setHighlights(pathStack, selection) {
-  var node = DomParser.findNodeByPath(pathStack);
+  var node = domParser.findNodeByPath(pathStack);
   var fullText = node.textContent;
   var startOfSelection = fullText.indexOf(selection);
 
@@ -164,7 +172,6 @@ function promptNote(callback) {
   var cancelButton = document.createElement("input");
   var divider = document.createElement('br');
   
-  textBox.type = "text";
   textBox.id = "noteTextBox";
   textBox.cols = 30;
   textBox.rows = 4;
