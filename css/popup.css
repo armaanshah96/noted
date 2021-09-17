@@ -43,11 +43,11 @@ h6 {
     height: 16px;
 }
 
-.trash-icon-hidden {
+.trash-icon--hidden {
     display: none;
 }
 
-.trash-icon-visible {
+.trash-icon {
     height: 32px;
     width: 32px;
     padding: 5px;
