@@ -4,7 +4,7 @@ import { StorageManager
 var STORAGE_OFFSET = 1;
 let storageManager = new StorageManager();
 
-storageManager.retrieveAllText(function(items) {
+storageManager.retrieveNotes().then(function(items) {
   const button = exportEl();
   document.body.append(button);
 	for(var urlKey of Object.keys(items)) {
