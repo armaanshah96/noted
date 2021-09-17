@@ -9,7 +9,6 @@
 	position: absolute;
 	box-sizing: content-box;
 	padding: 6px 6px 0px 6px;
-	display: none;
 	border-radius: 6px;
 	z-index: 100000001;
 }

@@ -15,3 +15,11 @@ export function clearSelection() {
     window.getSelection().removeAllRanges();
   }
 }
+
+export function getSelectionVerticalCoordinate() {
+    return getSelected().getRangeAt(0).getBoundingClientRect().y + window.scrollY;
+}
+
+export function getSelectionHorizontalCoordinate() {
+    return getSelected().getRangeAt(0).getBoundingClientRect().x;
+}

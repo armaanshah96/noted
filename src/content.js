@@ -1,44 +1,30 @@
 import { saveSelected } from "./services/StorageService";
 import { DomParser
  } from "./DomParser";
-import { clearSelection, getSelected } from "./services/SelectionService";
+import { clearSelection, getSelected, getSelectionHorizontalCoordinate, getSelectionVerticalCoordinate } from "./services/SelectionService";
 
-var pageX;
-var pageY;
 var isShown = false;
 
 let domParser = new DomParser();
 
-//mousedown event start
-document.addEventListener("mousedown", function(event){
-  //right click
+document.documentElement.addEventListener("mousedown", function(event){
   if(event.button == 0) {
-    pageX = event.pageX - 30;
-    pageY = event.pageY - 55;
-
     if(isShown) {
-      $("#tooltip").fadeOut(300, function(){
-        $(this).remove();
-      });
+      clearTooltip();
 
       isShown = false;
     }
   }
-}, true);
-// mousedown event ends
+});
 
-//mouseup event start
-document.addEventListener("mouseup", function(event){
-  //right click
+document.documentElement.addEventListener("mouseup", function(event){
   if(event.button == 0) {
     var selection =  getSelected().toString();
     if(selection != '') {
       showPopup();
     }
   }
-}, true);
-//mouseup event ends
-
+});
 
 function createHoverButton(icon, title) {
   var hoverButton = document.createElement("input");
@@ -51,13 +37,11 @@ function createHoverButton(icon, title) {
   return hoverButton;
 }
 
-//make and show popup
-// RENDER TOOLTIP
 function showPopup() {
-  var div = document.createElement( 'div' );
+  const div = document.createElement( 'div' );
   div.id = 'tooltip';
-  div.style.left = pageX+'px';
-  div.style.top = pageY+'px';
+  div.style.left = `${getSelectionHorizontalCoordinate() - 30}px`;
+  div.style.top = `${getSelectionVerticalCoordinate() - 55}px`;
 
   var ul = document.createElement('ul');
   ul.id = "tooltipButtons"
@@ -86,6 +70,7 @@ function showPopup() {
       });
 
       clearSelection()
+      clearTooltip();
     }
   });
 
@@ -102,6 +87,7 @@ function showPopup() {
       });
 
       clearSelection();
+      clearTooltip();
     }
   });
 
@@ -114,8 +100,6 @@ function showPopup() {
   div.appendChild(ul);
 
   document.body.appendChild( div );
-
-  $("#tooltip").fadeIn(300);
 
   isShown = true;
 }
@@ -171,8 +155,8 @@ function promptNote(callback) {
   inputDiv.appendChild(saveButton);
 
   inputDiv.id = 'notePrompt';
-  inputDiv.style.left = pageX+'px';
-  inputDiv.style.top = pageY+'px';
+  inputDiv.style.left = `${getSelectionHorizontalCoordinate() - 30}px`;
+  inputDiv.style.top = `${getSelectionVerticalCoordinate() - 55}px`;
  
   document.body.appendChild(inputDiv);
 
@@ -189,4 +173,8 @@ function promptNote(callback) {
     console.debug("Note was cancelled");
     inputDiv.remove();
   });
+}
+
+function clearTooltip() {
+  document.getElementById('tooltip').remove();
 }
