@@ -1,4 +1,4 @@
-import { saveSelected } from "./StorageManager";
+import { saveSelected } from "./popup/StorageManager";
 import { DomParser
  } from "./DomParser";
 

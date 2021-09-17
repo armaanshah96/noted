@@ -42,10 +42,12 @@ export const saveSelected = (url, title, text, pathStack, callback, note) => {
     });
 };
 
-export const deleteNote = (url, textIndex, callback) => {
+export const deleteNote = (url, selectionToDelete, callback) => {
   retrieveNotes(url)
     .then((existingSavedText) => {
-      existingSavedText.splice(textIndex, 1);
+      const deleteIndex = existingSavedText.findIndex(notes => notes.selection === selectionToDelete)
+      existingSavedText.splice(deleteIndex, 1);
+
       if (existingSavedText < 1) {
         console.error("Storage under this URL is in an unexpected state");
       } else if (existingSavedText.length === 1) {

@@ -1,4 +1,4 @@
-import { createNoteCategoryHeader } from "./NoteCategoryHeader";
+import { createNoteCategoryHeader } from "../NoteCategoryHeader";
 import { createNoteItem } from "./NoteItem";
 
 export const noteCategoryElement = (items, urlKey) => {
@@ -11,11 +11,10 @@ export const noteCategoryElement = (items, urlKey) => {
   listNode.append(headerElement);
 
   for (const noteObj of webpage) {
-    (function () {
-      const noteItem = createNoteItem(noteObj, urlKey);
+    const noteItem = createNoteItem(noteObj, urlKey);
 
-      listNode.append(noteItem);
-    })();
+    listNode.append(noteItem);
   }
+
   return listNode;
 };

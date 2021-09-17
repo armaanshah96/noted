@@ -1,5 +1,5 @@
-import { retrieveNotes } from "./StorageManager";
-import { noteCategoryElement  } from "./NoteCategory";
+import { retrieveNotes } from "./popup/StorageManager";
+import { noteCategoryElement  } from "./popup/NoteCategory";
 
 const render = () => {
   const containerEl = document.getElementById("notes-container");

@@ -1,5 +1,5 @@
 {
-   "author": "A, A",
+   "author": "Armaan",
    "background": {
       "scripts": [ "background.js" ]
    },
@@ -15,7 +15,7 @@
       "css": ["css/content.css"],
       "matches": [ "\u003Call_urls>" ]
    } ],
-   "description": "Medium inspired floating Popup for selected text to enhance productivity.",
+   "description": "Mark notable ideas and thoughts with minimal interruption when you're reading",
    "homepage_url": "https://github.com/armaanshah96/noted",
    "icons": {
       "128": "public/icons/128.png",
