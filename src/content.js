@@ -1,5 +1,4 @@
-import { StorageManager
- } from "./StorageManager";
+import { saveSelected } from "./StorageManager";
 import { DomParser
  } from "./DomParser";
 
@@ -7,7 +6,6 @@ var pageX;
 var pageY;
 var isShown = false;
 
-let storageManager = new StorageManager();
 let domParser = new DomParser();
 
 //mousedown event start
@@ -99,7 +97,7 @@ function showPopup() {
 
     if(selection != '') {
       document.execCommand('copy');
-      storageManager.saveSelected(location.href, document.title, selectionString, pathStack, function() { 
+      saveSelected(location.href, document.title, selectionString, pathStack, function() { 
           setHighlights(pathStack, selectionString)
       });
 
@@ -114,7 +112,7 @@ function showPopup() {
 
     if(selection != '') {
       promptNote(function(note) {
-        storageManager.saveSelected(location.href, document.title, selectionString , pathStack, function() {
+        saveSelected(location.href, document.title, selectionString , pathStack, function() {
           setHighlights(pathStack, selectionString)
         }, note);
       });

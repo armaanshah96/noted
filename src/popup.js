@@ -1,10 +1,8 @@
-import { StorageManager
- } from "./StorageManager";
+import { retrieveNotes, deleteNote } from "./StorageManager";
 
 var STORAGE_OFFSET = 1;
-let storageManager = new StorageManager();
 
-storageManager.retrieveNotes().then(function(items) {
+retrieveNotes().then(function(items) {
   const button = exportEl();
   document.body.append(button);
 	for(var urlKey of Object.keys(items)) {
@@ -64,7 +62,7 @@ function addListenerToTrashNode(trashIcon, listItem, url) {
       }
     }
 
-    storageManager.deleteNote(url, (STORAGE_OFFSET + i), function() { location.reload(); });
+    deleteNote(url, (STORAGE_OFFSET + i), function() { location.reload(); });
   });
 }
 
