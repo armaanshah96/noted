@@ -1,5 +1,5 @@
 import { getSelected } from "./services/SelectionService";
-import { renderTooltip, clearTooltip, tooltipVisible } from "./tooltip/tooltip";
+import { renderTooltip, removeTooltip, tooltipVisible } from "./tooltip/Tooltip";
 
 document.documentElement.addEventListener(
   "mousedown",
@@ -7,7 +7,7 @@ document.documentElement.addEventListener(
     if (event.button === 0) {
       const mouseDownOnTooltip = event.target.closest("#tooltip");
       if (tooltipVisible() && !mouseDownOnTooltip) {
-        clearTooltip();
+        removeTooltip();
       }
     }
   }

@@ -23,7 +23,7 @@ export const retrieveNotes = (key = null) => {
   });
 };
 
-export const saveSelected = (url, title, text, pathStack, callback, note) => {
+export const saveSelected = (url, title, text, pathStack, note) => {
   retrieveNotes(url)
     .then((savedText) => {
       savedText =
@@ -38,7 +38,6 @@ export const saveSelected = (url, title, text, pathStack, callback, note) => {
     })
     .then(() => {
       note && alert("Saved your note");
-      callback();
     });
 };
 
