@@ -23,15 +23,15 @@ export const retrieveNotes = (key = null) => {
   });
 };
 
-export const saveSelected = (url, title, text, pathStack, note) => {
+export const saveSelected = (url, title, text, note) => {
   retrieveNotes(url)
     .then((savedText) => {
       savedText =
         savedText && savedText.length > 0 ? savedText : [{ title: title }];
 
       const textObj = note
-        ? { selection: text, note, path: pathStack }
-        : { selection: text, path: pathStack };
+        ? { selection: text, note }
+        : { selection: text };
       const noteToSave = { [url]: savedText.concat(textObj) };
 
       return updateNote(noteToSave);

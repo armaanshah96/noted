@@ -4,10 +4,6 @@ import {
 } from "../services/SelectionService";
 import { createTooltipItem } from "./TooltipItem";
 
-export const tooltipVisible = () => {
-  return !!document.getElementById("tooltip");
-};
-
 export const renderTooltip = () => {
   const div = document.createElement("div");
   div.id = "tooltip";
@@ -28,3 +24,7 @@ export const renderTooltip = () => {
 export function removeTooltip() {
   document.getElementById("tooltip").remove();
 }
+
+export const tooltipVisible = () => {
+  return !!document.getElementById("tooltip");
+};
