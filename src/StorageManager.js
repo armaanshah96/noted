@@ -8,39 +8,31 @@ export class StorageManager {
     });
   }
 
-  saveSelected(url, title, text, pathStack, callback) {
-    this.retrieveNotes(url).then(function (existingSavedText) {
-      existingSavedText =
-        existingSavedText && existingSavedText.length > 0
-          ? existingSavedText
-          : [{ title: title }];
-
-      var textObj = { selection: text, path: pathStack };
-      var saveObj = { [url]: existingSavedText.concat(textObj) };
-
-      chrome.storage.sync.set(saveObj, function () {
-        console.debug(saveObj[url]);
-        callback();
+  saveNote(note) {
+    return new Promise((resolve, reject) => {
+      chrome.storage.sync.set(note, () => {
+        resolve();
       });
     });
   }
 
-  saveSelectedWithNote(url, title, selection, note, pathStack, callback) {
-    this.retrieveNotes(url).then(function (existingSavedText) {
-      existingSavedText =
-        existingSavedText && existingSavedText.length > 0
-          ? existingSavedText
-          : [{ title: title }];
+  saveSelected(url, title, text, pathStack, callback, note) {
+    this.retrieveNotes(url)
+      .then((savedText) => {
+        savedText =
+          savedText && savedText.length > 0 ? savedText : [{ title: title }];
 
-      var textAndNote = { selection: selection, note: note, path: pathStack };
-      var saveObj = { [url]: existingSavedText.concat(textAndNote) };
+        const textObj = note
+          ? { selection: text, note, path: pathStack }
+          : { selection: text, path: pathStack };
+        const noteToSave = { [url]: savedText.concat(textObj) };
 
-      chrome.storage.sync.set(saveObj, function () {
-        alert("Saved your note!");
-        console.debug("new text and note on this url: " + saveObj[url]);
+        return this.saveNote(noteToSave);
+      })
+      .then(() => {
+        note && alert("Saved your note");
         callback();
       });
-    });
   }
 
   deleteTextInKey(url, textIndex, callback) {

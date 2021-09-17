@@ -114,9 +114,9 @@ function showPopup() {
 
     if(selection != '') {
       promptNote(function(note) {
-        storageManager.saveSelectedWithNote(location.href, document.title, selectionString , note, pathStack, function() {
+        storageManager.saveSelected(location.href, document.title, selectionString , pathStack, function() {
           setHighlights(pathStack, selectionString)
-        });
+        }, note);
       });
 
       clearSelection();
