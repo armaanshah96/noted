@@ -32,17 +32,9 @@ export function createNoteItem(noteData, urlKey) {
 }
 
 function addListenersToTrashNode(trashIcon, listItem, url, selection) {
-  listItem.addEventListener("mouseover", function () {
-    trashIcon.classList.toggle("trash-icon--hidden");
-  });
-
-  listItem.addEventListener("mouseout", function () {
-    trashIcon.classList.toggle("trash-icon--hidden");
-  });
-
   trashIcon.addEventListener("click", function () {
-    deleteNote(url, selection, function () {
-      location.reload();
+    deleteNote(url, selection, shouldRemoveNoteCategory => {
+      shouldRemoveNoteCategory ? listItem.parentElement.remove() : listItem.remove();
     });
   });
 }

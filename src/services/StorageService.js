@@ -9,7 +9,7 @@ const updateNote = (note) => {
 const removeNoteCategory = (key) => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.remove(key, function () {
-      resolve();
+      resolve(true);
     });
   });
 };
@@ -56,5 +56,5 @@ export const deleteNote = (url, selectionToDelete, callback) => {
         return updateNote({ [url]: existingSavedText });
       }
     })
-    .then(() => callback());
+    .then((shouldRemoveNoteCategory) => callback(shouldRemoveNoteCategory))
 };
