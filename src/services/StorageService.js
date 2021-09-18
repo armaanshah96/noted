@@ -1,7 +1,7 @@
 const updateNote = (note) => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.set(note, () => {
-      resolve();
+      chrome.runtime.lastError ? reject(chrome.runtime.lastError) : resolve();
     });
   });
 };
@@ -9,7 +9,7 @@ const updateNote = (note) => {
 const removeNoteCategory = (key) => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.remove(key, function () {
-      resolve(true);
+      chrome.runtime.lastError ? reject(chrome.runtime.lastError) : resolve(true);
     });
   });
 };
@@ -18,7 +18,7 @@ export const retrieveNotes = (key = null) => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(key, (items) => {
       const extractedNote = key ? items[key] : items;
-      resolve(extractedNote);
+      chrome.runtime.lastError ? reject(chrome.runtime.lastError) : resolve(extractedNote);
     });
   });
 };
@@ -36,6 +36,10 @@ export const saveSelected = (url, title, text, note) => {
     })
     .then(() => {
       note && alert("Saved your note");
+    })
+    .catch(error => {
+      const noteErrorMessage = note && ' and note'
+      alert(`Your highlight ${noteErrorMessage} were not saved with the following error: ${error}`);
     });
 };
 
@@ -57,4 +61,7 @@ export const deleteNote = (url, selectionToDelete, callback) => {
       }
     })
     .then((shouldRemoveNoteCategory) => callback(shouldRemoveNoteCategory))
+    .catch(error => {
+      alert(`Your deletion failed with the following error: ${error}`);
+    });
 };
