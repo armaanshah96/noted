@@ -5,7 +5,6 @@ import {
 import { createTooltipItem } from "./TooltipItem";
 
 export const renderTooltip = () => {
-
   const ul = document.createElement("ul");
   ul.id = 'tooltip';
   ul.style.left = `${getSelectionHorizontalCoordinate() - 30}px`;
