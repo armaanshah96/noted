@@ -5,13 +5,13 @@ export function createNoteCategoryHeader(url, titleText) {
   const subtitle = constructNodeWithText("p", extractUrlHostname(url));
 
   if (titleText) {
-    const title = constructNodeWithText("h5", titleText);
+    const title = constructNodeWithText("h6", titleText);
 
     container.append(title);
   }
 
   container.append(subtitle);
-  container.classList.add("project-item-header");
+  container.classList.add("note-category-header");
 
   container.addEventListener("click", function () {
     window.open(url);

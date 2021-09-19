@@ -3,11 +3,10 @@ import { constructNodeWithText } from "../UIUtil";
 
 export function createNoteItem(noteData, urlKey) {
   const listItem = document.createElement("li");
-  const noteItemContainer = document.createElement('div');
   const selectionItem = constructNodeWithText(
     "p",
     noteData.selection,
-    "note-item-selection"
+    "note-category-item-selection"
   );
   const trashIcon = constructTrashIconNode();
   addListenersToTrashNode(trashIcon, listItem, urlKey, noteData.selection);
@@ -16,17 +15,15 @@ export function createNoteItem(noteData, urlKey) {
     const noteItem = constructNodeWithText(
       "p",
       noteData.note,
-      "project-item-note offset-1"
+      "note-category-item-user-note offset-1"
     );
 
     selectionItem.append(noteItem);
   }
 
-  listItem.classList.add("project-item-title");
+  listItem.classList.add("note-category-item");
 
-  noteItemContainer.classList.add('note-item')
-  noteItemContainer.append(selectionItem);
-  listItem.append(noteItemContainer);
+  listItem.append(selectionItem);
   listItem.append(trashIcon);
 
   return listItem;
