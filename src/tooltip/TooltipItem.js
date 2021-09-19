@@ -30,7 +30,7 @@ export const createTooltipItem = (itemType, buttonTitle) => {
   });
 
   item.append(itemBtn);
-  item.id = `${itemType}-item`;
+  item.classList.add(`tooltip-buttons-${itemType}`);
 
   return item;
 };

@@ -1,84 +1,79 @@
-@font-face {
-    font-family: "Nunito";
-    src: url(../public/fonts/Nunito-Regular.woff) format("woff"),
-         url(../public/fonts/Nunito-Regular.ttf) format("truetype");
-}
-
 #tooltip {
-	background-color: #333333;
-	position: absolute;
-	box-sizing: content-box;
-	padding: 6px 6px 0px 6px;
-	border-radius: 6px;
-	z-index: 100000001;
+  background-color: #333333;
+  position: absolute;
+  box-sizing: content-box;
+  padding: 6px 6px 0px 6px;
+  border-radius: 6px;
+  z-index: 100000001;
 }
 
-#tooltipButtons {
-	list-style-type:  none;
-	list-style: none;
-	padding: 0px;
-	margin: 0px;
+.tooltip-buttons {
+  list-style-type: none;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
 }
 
-#highlight-item {
-	padding: 0px 5px 0px 0px;
-	margin: 0px;
-	display: inline;
+.tooltip-buttons-highlight {
+  padding: 0px 5px 0px 0px;
+  margin: 0px;
+  display: inline;
 }
 
-#user-note-item {
-	padding: 0px;
-	margin: 0px;
-	display: inline;
+.tooltip-buttons-user-note {
+  padding: 0px;
+  margin: 0px;
+  display: inline;
 }
 
-#noteTextBox {
-	font-family: "Nunito", sans-serif;
-	background-color: #555555;
-	color: white;	
-	border: none;
-	border-radius: 2px;
-	width: 100%;
-	margin-bottom: 5px;
+.note-prompt {
+  background-color: #f4f4f4;
+  position: absolute;
+  padding: 1em;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  z-index: 200000001;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-#saveNoteButton {
-	background-color: #555555;
-	font-family: "Nunito", sans-serif;
-	margin: 0 0 0 2px;
-	-webkit-box-shadow: none;
-	text-shadow: none;
-	box-shadow: none;
-	color: white;
-	text-decoration: none;
-	cursor: pointer;
-	border: 0;
-	padding: .5em 1.25em;
-	border-radius: 5px;
+.note-prompt-textarea {
+  font-family: "Nunito", sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 2px;
+  width: 100%;
+  margin-bottom: 5px;
 }
 
-#cancelNoteButton {
-	background-color: #666666;
-	font-family: "Nunito", sans-serif;
-	margin: 0 2px 0 0;
-	-webkit-box-shadow: none;
-	text-shadow: none;
-	box-shadow: none;
-	color: white;
-	text-decoration: none;
-	cursor: pointer;
-	border: 0;
-	padding: .5em 1.25em;
-	border-radius: 5px;
+.note-prompt-save-btn {
+  background-color: rgb(40, 201, 59, 0.75);
+  font-family: "Nunito", sans-serif;
+  margin: 0 0 0 2px;
+  -webkit-box-shadow: none;
+  text-shadow: none;
+  box-shadow: none;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0.5em 1.25em;
+  border-radius: 5px;
 }
 
-#notePrompt {
-	background-color: #888888;
-	position: absolute;
-	padding: 1em;
-	display: flex;
-	justify-content: flex-end;
-	flex-wrap: wrap;
-	border-radius: 6px;
-	z-index: 200000001;
+.note-prompt-cancel-btn {
+  background-color: rgb(40, 201, 59, 0.25);
+  font-family: "Nunito", sans-serif;
+  margin: 0 2px 0 0;
+  -webkit-box-shadow: none;
+  text-shadow: none;
+  box-shadow: none;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0.5em 1.25em;
+  border-radius: 5px;
 }

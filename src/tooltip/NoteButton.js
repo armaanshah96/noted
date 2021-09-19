@@ -6,7 +6,7 @@ export const createNoteButton = (
 ) => {
   const noteButton = document.createElement("input");
   noteButton.type = "button";
-  noteButton.id = `${buttonType}-btn`;
+  noteButton.classList.add(`note-prompt-${buttonType}-btn`);
   noteButton.value = buttonType;
 
   noteButton.addEventListener("click", () => {

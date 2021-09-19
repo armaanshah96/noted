@@ -23,7 +23,7 @@ export function createUserNoteArea(callback) {
   inputContainer.append(cancelButton);
   inputContainer.append(saveButton);
 
-  inputContainer.id = "notePrompt";
+  inputContainer.classList.add('note-prompt');
   inputContainer.style.left = `${getSelectionHorizontalCoordinate() - 30}px`;
   inputContainer.style.top = `${getSelectionVerticalCoordinate() - 55}px`;
 

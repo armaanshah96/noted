@@ -11,7 +11,7 @@ export const renderTooltip = () => {
   div.style.top = `${getSelectionVerticalCoordinate() - 55}px`;
 
   const ul = document.createElement("ul");
-  ul.id = "tooltipButtons";
+  ul.classList.add("tooltip-buttons");
 
   ul.append(createTooltipItem("highlight", "Highlight"));
   ul.append(createTooltipItem("user-note", "Add note"));
