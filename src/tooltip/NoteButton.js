@@ -1,6 +1,8 @@
+import { removeNotePrompt } from "./NotePrompt";
+
 export const createNoteButton = (
   buttonType,
-  container,
+  shortcutKey,
   textareaEl,
   callback
 ) => {
@@ -12,12 +14,22 @@ export const createNoteButton = (
   noteButton.addEventListener("click", () => {
     if (buttonType === "save") {
       const noteResult = textareaEl.value;
-      container.remove();
+      removeNotePrompt();
       callback(noteResult);
     }
 
-    container.remove();
+    removeNotePrompt()
   });
+
+  setupShortcut(shortcutKey, noteButton);
 
   return noteButton;
 };
+
+function setupShortcut(key, button) {
+  document.addEventListener('keydown', (event) => {
+    if(event.key === key && document.contains(button)) {
+      button.click();
+    }
+  });
+}

@@ -4,15 +4,9 @@ import { createUserNoteArea } from "./NotePrompt";
 import { removeTooltip } from "./Tooltip";
 import { createHoverButton } from "./TooltipItemButton";
 
-const iconPath = {
-  highlight: "public/images/highlight.png",
-  "user-note": "public/images/note.png",
-};
-
 export const createTooltipItem = (itemType, buttonTitle) => {
   const item = document.createElement("li");
-  const itemIcon = chrome.runtime.getURL(iconPath[itemType]);
-  const itemBtn = createHoverButton(itemIcon, buttonTitle);
+  const itemBtn = createHoverButton(itemType, buttonTitle);
 
   itemBtn.addEventListener("click", function () {
     const selectionString = getSelected().toString();
@@ -30,7 +24,7 @@ export const createTooltipItem = (itemType, buttonTitle) => {
   });
 
   item.append(itemBtn);
-  item.classList.add(`tooltip-buttons-${itemType}`);
+  item.classList.add(`tooltip-buttons-button`);
 
   return item;
 };

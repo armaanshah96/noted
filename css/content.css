@@ -1,79 +1,72 @@
-#tooltip {
-  background-color: #333333;
+.tooltip-buttons {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: #f4f4f4;
   position: absolute;
-  box-sizing: content-box;
-  padding: 6px 6px 0px 6px;
+  padding: 6px;
   border-radius: 6px;
   z-index: 100000001;
-}
-
-.tooltip-buttons {
   list-style-type: none;
   list-style: none;
   padding: 0px;
   margin: 0px;
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-buttons-button {
+  display: inherit;
+  margin: .4rem;
 }
 
 .tooltip-buttons-highlight {
-  padding: 0px 5px 0px 0px;
-  margin: 0px;
-  display: inline;
+  border-radius: 5px;
 }
 
 .tooltip-buttons-user-note {
-  padding: 0px;
-  margin: 0px;
-  display: inline;
+  border-radius: 5px;
 }
 
 .note-prompt {
   background-color: #f4f4f4;
   position: absolute;
-  padding: 1em;
+  padding: .5em;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
   flex-wrap: wrap;
   border-radius: 5px;
   z-index: 200000001;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 16rem;
 }
 
 .note-prompt-textarea {
+  resize: vertical;
   font-family: "Nunito", sans-serif;
   background-color: #ffffff;
   color: #000000;
   border: none;
   border-radius: 2px;
-  width: 100%;
   margin-bottom: 5px;
+  width: 100%;
 }
 
 .note-prompt-save-btn {
   background-color: rgb(40, 201, 59, 0.75);
-  font-family: "Nunito", sans-serif;
   margin: 0 0 0 2px;
-  -webkit-box-shadow: none;
-  text-shadow: none;
-  box-shadow: none;
   color: white;
-  text-decoration: none;
   cursor: pointer;
   border: 0;
-  padding: 0.5em 1.25em;
-  border-radius: 5px;
+  padding: 0.5rem;
+  border-radius: 3px;
 }
 
 .note-prompt-cancel-btn {
   background-color: rgb(40, 201, 59, 0.25);
-  font-family: "Nunito", sans-serif;
   margin: 0 2px 0 0;
-  -webkit-box-shadow: none;
-  text-shadow: none;
-  box-shadow: none;
   color: white;
-  text-decoration: none;
   cursor: pointer;
   border: 0;
-  padding: 0.5em 1.25em;
-  border-radius: 5px;
+  padding: 0.5rem;
+  border-radius: 3px;
 }

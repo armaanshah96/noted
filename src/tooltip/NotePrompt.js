@@ -11,21 +11,29 @@ export function createUserNoteArea(callback) {
   const noteTextarea = createNoteTextarea();
   const saveButton = createNoteButton(
     "save",
-    inputContainer,
+    "Enter",
     noteTextarea,
     callback
   );
-  const cancelButton = createNoteButton("cancel", inputContainer);
-  const divider = document.createElement("br");
+  const cancelButton = createNoteButton("cancel", "Escape");
+  const buttonContainer = document.createElement('div');
+  buttonContainer.append(cancelButton);
+  buttonContainer.append(saveButton);
 
   inputContainer.append(noteTextarea);
-  inputContainer.append(divider);
-  inputContainer.append(cancelButton);
-  inputContainer.append(saveButton);
+  inputContainer.append(buttonContainer);
 
   inputContainer.classList.add('note-prompt');
   inputContainer.style.left = `${getSelectionHorizontalCoordinate() - 30}px`;
   inputContainer.style.top = `${getSelectionVerticalCoordinate() - 55}px`;
 
   document.body.append(inputContainer);
+}
+
+export const removeNotePrompt = () => {
+  return document.querySelector('.note-prompt').remove();
+}
+
+export const notePromptVisible = () => {
+  return !!document.querySelector('.note-prompt');
 }
