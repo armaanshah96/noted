@@ -48,11 +48,17 @@ h6 {
 }
 
 .trash-icon {
-    height: 32px;
-    width: 32px;
-    padding: 5px;
-    display: inline;
-    margin-left: auto;
+    height: 16px;
+    width: 16px;
+}
+
+.note-item {
+    display: inherit;
+    align-items: center;
+}
+
+.note-item-selection {
+    margin: 0;
 }
 
 ::-webkit-scrollbar {
@@ -24429,12 +24435,8 @@ fieldset[disabled] .full-calendar .fc-button:hover {
 
 .project-item {
     position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
     background-color: #fff;
     padding: 23px;
     margin-bottom: .923077rem
@@ -24481,21 +24483,11 @@ fieldset[disabled] .full-calendar .fc-button:hover {
 }
 
 .project-item-title {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 1 20%;
     flex: 0 1 20%;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    padding-right: 5px
     color: #5b5b5b;
-    justify-content: flex-start;
-}
-
-.project-item-selection {
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .project-item-note {
