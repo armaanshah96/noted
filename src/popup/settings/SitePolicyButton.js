@@ -7,7 +7,8 @@ export async function createSitePolicyButton() {
 
   policyButton.textContent = activePolicy.policy;
   policyButton.dataset.policyKey = activePolicy.policyKey;
-  policyButton.classList.add("settings-policy-button");
+  policyButton.classList.add("settings-content-button-policy");
+  policyButton.classList.add("settings-content-button");
 
   policyButton.addEventListener("click", policyButtonListener);
 
@@ -32,5 +33,5 @@ function togglePolicyButton(policyButton, newPolicy) {
 }
 
 function getPolicyButton() {
-  return document.querySelector(".settings-policy-button");
+  return document.querySelector(".settings-content-button-policy");
 }

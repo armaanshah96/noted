@@ -25,6 +25,9 @@
 
 .popup-content-settings {
   margin: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .note-category {
@@ -72,16 +75,20 @@
   margin: 0;
 }
 
-.settings-policy-button {
+.settings-content-button {
   background-color: rgb(40, 201, 59, 0.5);
   box-shadow: 0 4px 8px 0 rgba(40, 201, 59, 0.25);
   color: white;
   cursor: pointer;
-  border: 0;
+  border: 0 rgb(40, 201, 59, 0.75);
   padding: 0.5rem;
   border-radius: 3px;
+  margin: .5rem 0;
 }
 
+.settings-content-button:hover {
+  background-color: rgb(40, 201, 59, 0.75);
+}
 /*!
  * Maisonnette-admin v1.3.2
  * https://foxythemes.net

@@ -1,6 +1,7 @@
 import { retrieveNotes, WEBSITE_POLICIES_STORAGE_KEY } from "../services/StorageService";
 import { noteCategoryElement } from "./NoteCategory";
 import { createSitePolicyButton } from "./settings/SitePolicyButton";
+import { createExportButton } from "./settings/ExportButton";
 
 export const renderPopupMainContent = () => {
   const contentContainer = document.createElement('div');
@@ -24,6 +25,7 @@ export const createSettingsContent = async () => {
   const contentContainer = document.createElement('div');
   contentContainer.classList.add('popup-content-settings');
   contentContainer.append(await createSitePolicyButton());
+  contentContainer.append(createExportButton());
 
   cleanupContent('.popup-content-noted');
 
