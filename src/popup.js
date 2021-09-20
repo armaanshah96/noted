@@ -1,22 +1,35 @@
-import { noteCategoryElement } from "./popup/NoteCategory";
-import { renderSettings } from "./popup/settings/Settings";
-import { retrieveNotes } from "./services/StorageService";
+import { createSettingsContent, renderPopupMainContent } from "./popup/PopupContent";
+import {
+  createBackButton,
+  createSettingsButton
+} from "./popup/PopupHeaderButton";
+import { createPopupHeaderText } from "./popup/PopupHeaderText";
 
-const render = () => {
-  const containerEl = document.getElementById("popup-container");
-
-  const settingsButton = document.createElement("button");
-  settingsButton.textContent = "Settings";
-  settingsButton.addEventListener("click", async () => await renderSettings());
-  containerEl.append(settingsButton);
-
-  retrieveNotes().then(function (items) {
-    for (const urlKey in items) {
-      const listNode = noteCategoryElement(items, urlKey);
-
-      containerEl.append(listNode);
-    }
-  });
+export const render = async (isMainPage) => {
+  renderPopupHeader(isMainPage);
+  await renderPopupContent(isMainPage);
 };
 
-render();
+const renderPopupHeader = (isMainPage) => {
+  const popupHeaderContainer = document.querySelector(".popup-header");
+
+  popupHeaderContainer.append(createPopupHeaderText(isMainPage));
+  popupHeaderContainer.append(
+    isMainPage ? createSettingsButton() : createBackButton()
+  );
+};
+
+const renderPopupContent = async (isMainPage) => {
+  const containerEl = document.querySelector(".popup-content");
+  let contentEl;
+
+  if(isMainPage) {
+    contentEl = renderPopupMainContent();
+  } else {
+    contentEl = await createSettingsContent();
+  }
+
+  containerEl.append(contentEl);
+};
+
+render(true);

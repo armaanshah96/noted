@@ -13,6 +13,20 @@
   margin: 1em;
 }
 
+.popup-header-button {
+  background-color: rgb(40, 201, 59, 0.75);
+  color: white;
+  cursor: pointer;
+  border: 0;
+  padding: 0.5rem;
+  border-radius: 3px;
+  float: right;
+}
+
+.popup-content-settings {
+  margin: 3em;
+}
+
 .note-category {
   display: flex;
   flex-direction: column;
@@ -56,6 +70,16 @@
 
 .note-category-item-selection {
   margin: 0;
+}
+
+.settings-policy-button {
+  background-color: rgb(40, 201, 59, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(40, 201, 59, 0.25);
+  color: white;
+  cursor: pointer;
+  border: 0;
+  padding: 0.5rem;
+  border-radius: 3px;
 }
 
 /*!

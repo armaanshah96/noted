@@ -1,4 +1,4 @@
-const WEBSITE_POLICIES_STORAGE_KEY = "website_policies";
+export const WEBSITE_POLICIES_STORAGE_KEY = "website_policies";
 
 const updateNote = (note) => {
   return new Promise((resolve, reject) => {
