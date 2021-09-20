@@ -1,11 +1,11 @@
-import { policy_configs } from "./constants";
+import { POLICY_CONFIG_MAP } from "./services/PolicyService";
 import { getSelected } from "./services/SelectionService";
 import { isUrlExcluded } from "./services/StorageService";
 import { notePromptVisible, removeNotePrompt } from "./tooltip/NotePrompt";
 import {
   removeTooltip,
   renderTooltip,
-  tooltipVisible
+  tooltipVisible,
 } from "./tooltip/Tooltip";
 
 setMessageListener();
@@ -45,7 +45,7 @@ export function excludeCurrentSite() {
 
 function setMessageListener() {
   chrome.runtime.onMessage.addListener((request) => {
-    policy_configs.rules
+    POLICY_CONFIG_MAP.rules
       .find((policy) => policy.policyKey === request.policyKey)
       .currentSiteAction();
   });
