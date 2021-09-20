@@ -1,28 +1,53 @@
+import { policy_configs } from "./constants";
 import { getSelected } from "./services/SelectionService";
-import { POLICIES } from "./constants";
+import { isUrlExcluded } from "./services/StorageService";
 import { notePromptVisible, removeNotePrompt } from "./tooltip/NotePrompt";
 import {
-  removeTooltip, renderTooltip, tooltipVisible
+  removeTooltip,
+  renderTooltip,
+  tooltipVisible
 } from "./tooltip/Tooltip";
 
-setNotedListeners();
 setMessageListener();
+isUrlExcluded(location.host).then(
+  (isExcluded) => isExcluded || setNotedListeners()
+);
 
 export function setNotedListeners() {
-  document.documentElement.addEventListener("mouseup", renderTooltipOnSelection);
-  document.documentElement.addEventListener("mousedown", removeTooltipOnMouseDown);
-  document.documentElement.addEventListener("mousedown", removeNotePromptOnMouseDown);
+  document.documentElement.addEventListener(
+    "mouseup",
+    renderTooltipOnSelection
+  );
+  document.documentElement.addEventListener(
+    "mousedown",
+    removeTooltipOnMouseDown
+  );
+  document.documentElement.addEventListener(
+    "mousedown",
+    removeNotePromptOnMouseDown
+  );
 }
 
 export function excludeCurrentSite() {
-  document.documentElement.removeEventListener("mouseup", renderTooltipOnSelection);
-  document.documentElement.removeEventListener("mousedown", removeTooltipOnMouseDown);
-  document.documentElement.removeEventListener("mousedown", removeNotePromptOnMouseDown);
+  document.documentElement.removeEventListener(
+    "mouseup",
+    renderTooltipOnSelection
+  );
+  document.documentElement.removeEventListener(
+    "mousedown",
+    removeTooltipOnMouseDown
+  );
+  document.documentElement.removeEventListener(
+    "mousedown",
+    removeNotePromptOnMouseDown
+  );
 }
 
 function setMessageListener() {
   chrome.runtime.onMessage.addListener((request) => {
-    POLICIES.find(policy => policy.policyKey === request.policyKey).action();
+    policy_configs.rules
+      .find((policy) => policy.policyKey === request.policyKey)
+      .currentSiteAction();
   });
 }
 

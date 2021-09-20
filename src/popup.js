@@ -5,9 +5,9 @@ import { retrieveNotes } from "./services/StorageService";
 const render = () => {
   const containerEl = document.getElementById("popup-container");
 
-  const settingsButton = document.createElement('button');
-  settingsButton.textContent = 'Settings';
-  settingsButton.addEventListener('click', () => renderSettings());
+  const settingsButton = document.createElement("button");
+  settingsButton.textContent = "Settings";
+  settingsButton.addEventListener("click", async () => await renderSettings());
   containerEl.append(settingsButton);
 
   retrieveNotes().then(function (items) {

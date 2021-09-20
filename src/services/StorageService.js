@@ -1,3 +1,5 @@
+const WEBSITE_POLICIES_STORAGE_KEY = "website_policies";
+
 const updateNote = (note) => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.set(note, () => {
@@ -72,4 +74,66 @@ export const deleteNote = (url, selectionToDelete, callback) => {
     .catch((error) => {
       alert(`Your deletion failed with the following error: ${error}`);
     });
+};
+
+const retrieveWebsitePolicies = () => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get(WEBSITE_POLICIES_STORAGE_KEY, (items) => {
+      let websitePolicies = Object.keys(items[WEBSITE_POLICIES_STORAGE_KEY])
+        .length
+        ? items[WEBSITE_POLICIES_STORAGE_KEY]
+        : [];
+      chrome.runtime.lastError
+        ? reject(chrome.runtime.lastError)
+        : resolve(websitePolicies);
+    });
+  });
+};
+
+const setWebsitePolicies = (newWebsitePolicies) => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.set(
+      { [WEBSITE_POLICIES_STORAGE_KEY]: [...newWebsitePolicies] },
+      () => {
+        chrome.runtime.lastError ? reject(chrome.runtime.lastError) : resolve();
+      }
+    );
+  });
+};
+
+export const addWebsitePolicy = (urlToAdd) => {
+  retrieveWebsitePolicies()
+    .then((websitePolicies) => {
+      const policySet = new Set(websitePolicies);
+      policySet.add(urlToAdd);
+
+      setWebsitePolicies(policySet);
+    })
+    .catch((error) => {
+      alert(
+        `Something went wrong when excluding this website with the following error: ${error}`
+      );
+    });
+};
+
+export const removeWebsitePolicy = (urlToRemove) => {
+  retrieveWebsitePolicies()
+    .then((websitePolicies) => {
+      const newWebsitePolicies = websitePolicies.filter(
+        (policy) => policy !== urlToRemove
+      );
+
+      setWebsitePolicies(newWebsitePolicies);
+    })
+    .catch((error) => {
+      alert(
+        `Something went wrong when including this website with the following error: ${error}`
+      );
+    });
+};
+
+export const isUrlExcluded = (host) => {
+  return retrieveWebsitePolicies().then(
+    (websitePolicies) => !!websitePolicies.find((policy) => policy === host)
+  );
 };
