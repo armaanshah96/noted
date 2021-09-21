@@ -1,6 +1,6 @@
 const iconPath = {
-  highlight: "public/images/highlight.png",
-  "user-note": "public/images/userNote.png",
+  highlight: "public/icons/highlight.png",
+  "user-note": "public/icons/userNote.png",
 };
 
 export function createHoverButton(itemType, title) {

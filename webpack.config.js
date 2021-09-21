@@ -7,7 +7,7 @@ module.exports = {
     // to analyze what gets bundled
     entry: {
         popup: './src/popup.js',
-        content: './src/content.js',
+        noted: './src/noted.js',
     },
     // where does the bundling out go?
     output: {

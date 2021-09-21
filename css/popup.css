@@ -65,9 +65,11 @@
 .note-category-item-user-note-container {
   display: flex;
   flex-direction: row;
+  margin-top: 0.3rem;
 }
 
 .note-category-item-user-note-prefix {
+  flex-shrink: 0;
   color: #5b5b5b;
   margin: 0 5px 0 0;
 }

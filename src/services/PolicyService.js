@@ -1,4 +1,4 @@
-import { excludeCurrentSite, setNotedListeners } from "../content";
+import { excludeCurrentSite, setNotedListeners } from "../noted";
 import {
   addWebsitePolicy,
   isUrlExcluded,

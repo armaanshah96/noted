@@ -1,15 +1,12 @@
 {
    "author": "Armaan",
-   "background": {
-      "scripts": [ "background.js" ]
-   },
    "browser_action": {
       "default_popup": "popup.html#noted",
       "default_icon": "public/icons/128.png"
    },
    "content_scripts": [ {
       "js": [
-         "assets/scripts/content.js"
+         "assets/scripts/noted.js"
       ],
       "css": ["css/content.css"],
       "matches": [ "\u003Call_urls>" ]
@@ -27,5 +24,5 @@
    "permissions": [ "activeTab", "storage" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "1.0",
-   "web_accessible_resources": [ "public/images/*.png" ]
+   "web_accessible_resources": [ "public/icons/*.png" ]
 }
