@@ -1,8 +1,11 @@
 import { deleteNote } from "../services/StorageService";
 import { constructNodeWithText } from "../UIUtil";
+import { createNoteItemUserNote } from "./NoteItemUserNote";
 
 export function createNoteItem(noteData, urlKey) {
   const listItem = document.createElement("li");
+  const selectionAndNoteContainer = document.createElement('div');
+  selectionAndNoteContainer.classList.add('note-category-content')
   const selectionItem = constructNodeWithText(
     "p",
     noteData.selection,
@@ -10,20 +13,14 @@ export function createNoteItem(noteData, urlKey) {
   );
   const trashIcon = constructTrashIconNode();
   addListenersToTrashNode(trashIcon, listItem, urlKey, noteData.selection);
+  selectionAndNoteContainer.append(selectionItem);
 
   if (noteData.note) {
-    const noteItem = constructNodeWithText(
-      "p",
-      noteData.note,
-      "note-category-item-user-note offset-1"
-    );
-
-    selectionItem.append(noteItem);
+    selectionAndNoteContainer.append(createNoteItemUserNote(noteData));
   }
 
   listItem.classList.add("note-category-item");
-
-  listItem.append(selectionItem);
+  listItem.append(selectionAndNoteContainer);
   listItem.append(trashIcon);
 
   return listItem;

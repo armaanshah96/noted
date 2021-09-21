@@ -51,24 +51,39 @@
 }
 
 .note-category-item {
-  padding: 10px;
+  padding: 1rem;
   margin: 0.3rem 0;
   display: flex;
   flex: 0 1 20%;
-  color: #5b5b5b;
+  color: #242424;
   justify-content: space-between;
   align-items: center;
   border-radius: 3px;
   background-color: rgb(40, 201, 59, 0.05);
 }
 
-.note-category-item-user-note {
-  color: #242424;
+.note-category-item-user-note-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.note-category-item-user-note-prefix {
+  color: #5b5b5b;
+  margin: 0 5px 0 0;
+}
+
+.note-category-item-user-note-content {
+  margin: 0;
 }
 
 .trash-icon {
   height: 16px;
   width: 16px;
+}
+
+.note-category-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .note-category-item-selection {
