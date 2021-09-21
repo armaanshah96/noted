@@ -9,7 +9,7 @@ import {
 } from "./tooltip/Tooltip";
 
 setMessageListener();
-isUrlExcluded(location.host).then(
+isNotPopup() && isUrlExcluded(location.host).then(
   (isExcluded) => isExcluded || setNotedListeners()
 );
 
@@ -41,6 +41,9 @@ export function excludeCurrentSite() {
     "mousedown",
     removeNotePromptOnMouseDown
   );
+
+  tooltipVisible() && removeTooltip();
+  notePromptVisible() && removeNotePrompt();
 }
 
 function setMessageListener() {
@@ -77,4 +80,8 @@ function removeNotePromptOnMouseDown(event) {
       removeNotePrompt();
     }
   }
+}
+
+function isNotPopup() {
+  return location.hash !== '#noted';
 }

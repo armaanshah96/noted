@@ -29,7 +29,7 @@
 .note-prompt {
   background-color: #f4f4f4;
   position: absolute;
-  padding: .5em;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -37,7 +37,7 @@
   border-radius: 5px;
   z-index: 200000001;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  width: 16rem;
+  width: 200px;
 }
 
 .note-prompt-textarea {
@@ -52,21 +52,23 @@
 }
 
 .note-prompt-save-btn {
+  font-size: 14px;
   background-color: rgb(40, 201, 59, 0.75);
   margin: 0 0 0 2px;
   color: white;
   cursor: pointer;
   border: 0;
-  padding: 0.5rem;
+  padding: 5px 10px;
   border-radius: 3px;
 }
 
 .note-prompt-cancel-btn {
+  font-size: 14px;
   background-color: rgb(40, 201, 59, 0.25);
   margin: 0 2px 0 0;
   color: white;
   cursor: pointer;
   border: 0;
-  padding: 0.5rem;
+  padding: 5px 10px;
   border-radius: 3px;
 }
