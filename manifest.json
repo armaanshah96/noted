@@ -18,7 +18,7 @@
       "16": "public/icons/16.png",
       "48": "public/icons/48.png"
    },
-   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnque2hu5m1zKypS5XIq1SCCQhQHGJLVfM7CiQ7cIT1Bp8FjZozkkTYueDRDvNSVJzSu3G5E6vaFT0wbQpctEX7+4c/V3krwMB9BraHQrGGFk9GPlZ/5DnVq9onoSIqYrvyppnd4+BIcKizvJsb/EmMAvbLoSCn+bVPWGsydVOLMrBPy1kfymTh2CaFJlBQu0/HCGXrx4O5V6LPCTUnmfkAsurmB8iyG/sxTtCt826goCcpGjDijJ5h+ZkDifxmCQzxHNSf5VE5+AIkQwF0HDUIIHEthJgOxiF6OgvO7hIHJjhVCvxbucCwhddpKNAubMjOe98guwu+17xVnBV1TyHQIDAQAB",
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm+t7bC9psLz0Y5ep8IuvGiHGgGK5YxR80EXi0L1mgE6inrdFPA/k91/YLIy8HQv6N3Lu1Ff3yoeFRlKmSgACnP8XiqAmwy4F7+pOo6KD7SrvVGDWBg2dEncUGgK6lMRWb57B0iQDRx1n8lrw6WjSYKNymUWQCuDRZDrS/0XZxOoWfj6HhEmiBRg+6/r9JgSrs8EymBMUmIez64l60JLjk3jh+6ZjKNjfUieGPGvZspYac9rqubWtUOw3uG9Ge186f0KXAUBgV+EhBx/s8jWKym5k6y1dtxUAZi3Ro+ysnIIvRH8XT8sik0VFCpoVNtKl3kKUxM2A8El4Ju5b2sQZsQIDAQAB",
    "manifest_version": 2,
    "name": "Noted",
    "permissions": [ "activeTab", "storage" ],

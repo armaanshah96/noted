@@ -16,9 +16,9 @@ export const createNoteButton = (
       const noteResult = textareaEl.value;
       removeNotePrompt();
       callback(noteResult);
+    } else {
+      removeNotePrompt()
     }
-
-    removeNotePrompt()
   });
 
   setupShortcut(shortcutKey, noteButton);

@@ -79,10 +79,7 @@ export const deleteNote = (url, selectionToDelete, callback) => {
 const retrieveWebsitePolicies = () => {
   return new Promise((resolve, reject) => {
     chrome.storage.sync.get(WEBSITE_POLICIES_STORAGE_KEY, (items) => {
-      let websitePolicies = Object.keys(items[WEBSITE_POLICIES_STORAGE_KEY])
-        .length
-        ? items[WEBSITE_POLICIES_STORAGE_KEY]
-        : [];
+      let websitePolicies = items[WEBSITE_POLICIES_STORAGE_KEY] || [];
       chrome.runtime.lastError
         ? reject(chrome.runtime.lastError)
         : resolve(websitePolicies);
